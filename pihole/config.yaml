@@ -1,0 +1,24 @@
+name: "Pi-hole"
+version: "1.0"
+slug: "pihole"
+description: "Pi-hole: A network-wide ad blocker."
+arch:
+  - amd64
+  - armv7
+  - arm64
+ports:
+  53/tcp: 53
+  53/udp: 53
+  67/udp: 67
+  80/tcp: 80
+environment:
+  - TZ=America/Chicago
+map:
+  - config:rw
+  - share:rw
+  - ssl
+options:
+  webpassword: ""
+schema:
+  webpassword: str
+host_network: false
