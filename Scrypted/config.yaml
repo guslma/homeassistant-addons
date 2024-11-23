@@ -44,5 +44,5 @@ slug: scrypted
 uart: true
 url: https://github.com/koush/scrypted
 usb: true
-version: v0.123.36-jammy-full
+version: v0.123.37-jammy-nvidia
 video: true
