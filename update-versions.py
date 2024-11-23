@@ -5,12 +5,10 @@ import requests
 
 def get_latest_tag(repo_name):
     """Obtém a última tag de versão de uma imagem Docker no Docker Hub ou no GitHub para casos específicos."""
-    # Caso especial para o repositório koush/scrypted
     if repo_name == "koush/scrypted":
         print(f"Getting latest version of {repo_name} from GitHub")
         return get_latest_tag_from_github(repo_name)
     
-    # Busca padrão no Docker Hub
     print(f"Getting latest version of {repo_name} from Docker Hub")
     tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
     response = requests.get(tags_url)
@@ -44,8 +42,13 @@ def get_latest_tag_from_github(repo_name):
         print(f"No version tags found for {repo_name} on GitHub.")
         return None
 
+def process_file(file_path, file_format):
+    """Processa um arquivo de configuração (JSON ou YAML) e atualiza a versão, se necessário."""
+    with open(file_path, 'r') as f:
+        config = yaml.safe_load(f) if file_format == 'yaml' else json.load(f)
+    
     if 'image' in config:
-        print(f"Getting latest version of {config['image']} from Docker Hub")
+        print(f"Getting latest version of {config['image']}")
         latest_tag = get_latest_tag(config['image'])
         print(f"Latest version of {config['image']} is {latest_tag}")
         
@@ -58,6 +61,7 @@ def get_latest_tag_from_github(repo_name):
                 elif file_format == 'json':
                     json.dump(config, f, indent=2)
 
+# Loop principal para processar arquivos
 for root, dirs, files in os.walk('.'):
     for file in files:
         if file.endswith('config.yaml'):
