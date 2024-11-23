@@ -1,23 +1,22 @@
 arch:
-- amd64
-- aarch64
+  - amd64
+  - aarch64
 backup_exclude:
-- '*/server/**'
-- '*/scrypted_nvr/**'
-- '*/scrypted_data/plugins/**'
-description: Scrypted is a high performance home video integration and automation
-  platform
+  - '*/server/**'
+  - '*/scrypted_nvr/**'
+  - '*/scrypted_data/plugins/**'
+description: Scrypted is a high performance home video integration and automation platform
 devices:
-- /dev/mem
-- /dev/dri/renderD128
-- /dev/apex_0
-- /dev/apex_1
-- /dev/apex_2
-- /dev/apex_3
-- /dev/dri/card0
-- /dev/vchiq
-- /dev/video10
-- /dev/video0
+  - /dev/mem
+  - /dev/dri/renderD128
+  - /dev/apex_0
+  - /dev/apex_1
+  - /dev/apex_2
+  - /dev/apex_3
+  - /dev/dri/card0
+  - /dev/vchiq
+  - /dev/video10
+  - /dev/video0
 environment:
   SCRYPTED_ADMIN_ADDRESS: 172.30.32.2
   SCRYPTED_ADMIN_USERNAME: homeassistant
@@ -35,9 +34,9 @@ ingress_port: 11080
 ingress_stream: true
 init: false
 map:
-- config:rw
-- media:rw
-- share:rw
+  - homeassistant_config:rw  # Atualizado de 'config' para 'homeassistant_config'
+  - media:rw
+  - share:rw
 name: Scrypted
 panel_icon: mdi:memory
 slug: scrypted
