@@ -1,24 +1,26 @@
-name: "Pi-hole"
-version: "1.0"
-slug: "pihole"
-description: "Pi-hole: A network-wide ad blocker."
 arch:
   - amd64
   - armv7
   - arm64
+backup_exclude:
+- node_modules
+description: "Pi-hole: A network-wide ad blocker."
+host_network: false
+image: pihole/pihole
+init: false
+name: "Pi-hole"
+version: "1.0"
+slug: "pihole"
 ports:
   53/tcp: 53
   53/udp: 53
   67/udp: 67
   80/tcp: 80
-environment:
-  - TZ=America/Chicago
+  8800/tcp: 8800
 map:
   - config:rw
   - share:rw
   - ssl
-options:
-  webpassword: ""
-schema:
-  webpassword: str
-host_network: false
+slug: homebridge
+url: https://hub.docker.com/r/pihole/pihole
+webui: http://[HOST]:[PORT:8800]
