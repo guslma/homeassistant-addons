@@ -6,7 +6,7 @@
 ![Supports armv7 Architecture][armv7-shield]
 ![Supports i386 Architecture][i386-shield]
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/zigbee2mqtt/zigbee2mqtt-amd64.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/zigbee2mqtt/zigbee2mqtt-amd64)
+[![Docker Pulls](https://img.shields.io/docker/pulls/koenkk/zigbee2mqtt.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koenkk/zigbee2mqtt)
 
 ## About
 
