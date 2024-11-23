@@ -1,11 +1,9 @@
 arch:
   - amd64
   - armv7
-  - arm64
 backup_exclude:
 - node_modules
 description: "Pi-hole: A network-wide ad blocker."
-host_network: false
 image: pihole/pihole
 init: false
 name: "Pi-hole"
