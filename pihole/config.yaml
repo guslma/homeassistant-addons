@@ -16,7 +16,7 @@ ports:
   80/tcp: 80
   8800/tcp: 8800
 map:
-  - config:rw
+  - config:homeassistant_config
   - share:rw
   - ssl
 slug: homebridge
