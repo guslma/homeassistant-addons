@@ -33,4 +33,4 @@ jobs:
           body: 'Automated update of Docker image versions.'
           base: main
           branch: update-docker-versions
-          commit-message: 'Update Docker image versions in config.yaml files'
+          commit-message: 'Update Docker image versions in config.yaml and config.json files'
