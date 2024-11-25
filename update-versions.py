@@ -10,8 +10,13 @@ def get_latest_tag(repo_name):
         response = requests.get(tags_url)
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
         tags = response.json().get('results', [])
-        # Filtra as tags que têm números e não contêm a palavra "nvidia"
-        version_tags = [tag['name'] for tag in tags if any(char.isdigit() for char in tag['name']) and "nvidia" not in tag['name'].lower()]
+        # Filtra as tags que têm números e não contêm "nvidia" ou "lite"
+        version_tags = [
+            tag['name'] for tag in tags
+            if any(char.isdigit() for char in tag['name']) and
+               "nvidia" not in tag['name'].lower() and
+               "lite" not in tag['name'].lower()
+        ]
         return sorted(version_tags, reverse=True)[0] if version_tags else None
     except requests.exceptions.RequestException as e:
         print(f"Erro ao acessar o Docker Hub: {e}")
