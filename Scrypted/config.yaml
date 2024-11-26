@@ -9,18 +9,17 @@ host_network: true
 image: ghcr.io/koush/scrypted
 init: false
 map:
-  - path: /nvr
-    read_only: false
-    type: media
-  - path: /config/scrypted
-    read_only: false
-    type: addon_config
-  - path: /var/run/dbus
-    read_only: false
-    type: host
-  - path: /var/run/avahi-daemon/socket
-    read_only: false
-    type: host
+  config: true
+  media: true
+  ssl: false
+  backup: false
+  share: false
+  addons: false
+options:
+  nvr_path: /nvr
+  config_path: /config/scrypted
+  dbus_socket: /var/run/dbus
+  avahi_socket: /var/run/avahi-daemon/socket
 name: Scrypted
 ports:
   10444/tcp: 10444
