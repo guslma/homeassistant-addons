@@ -35,7 +35,7 @@ ingress_port: 11080
 ingress_stream: true
 init: false
 map:
-- homeassistant_config:rw
+- config:rw
 - media:rw
 - share:rw
 name: Scrypted
