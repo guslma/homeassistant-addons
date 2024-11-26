@@ -19,7 +19,7 @@ gpio: true
 usb: true
 uart: true
 video: true
-image: "ghcr.io/koush/scrypted"
+image: "koush/scrypted"
 environment:
   SCRYPTED_INSTALL_PLUGIN: "@scrypted/homeassistant"
   SCRYPTED_VOLUME: "/data/scrypted_data"
