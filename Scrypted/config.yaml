@@ -9,14 +9,9 @@ host_network: true
 image: ghcr.io/koush/scrypted
 init: false
 map:
-  - path: /config/scrypted
-    type: addon_config
-  - path: /nvr
-    type: media
-  - path: /var/run/dbus
-    type: host
-  - path: /var/run/avahi-daemon/socket
-    type: host
+- path: /homebridge
+  read_only: false
+  type: addon_config
 name: Scrypted
 ports:
   10444/tcp: 10444
