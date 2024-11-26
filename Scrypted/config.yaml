@@ -35,11 +35,9 @@ ingress_port: 11080
 ingress_stream: true
 init: false
 map:
-- path: /homebridge
+- path: /scrypted
   read_only: false
   type: addon_config
-- media:rw
-- share:rw
 name: Scrypted
 panel_icon: mdi:memory
 slug: scrypted
