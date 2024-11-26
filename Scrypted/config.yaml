@@ -35,7 +35,9 @@ ingress_port: 11080
 ingress_stream: true
 init: false
 map:
-- homeassistant_config:rw
+- path: /homebridge
+  read_only: false
+  type: addon_config
 - media:rw
 - share:rw
 name: Scrypted
