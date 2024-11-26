@@ -4,22 +4,26 @@ import yaml
 import requests
 
 def get_latest_tag(repo_name):
-    """Obtém a última tag de versão de uma imagem Docker no Docker Hub."""
-    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
+    """Obtém a última tag de versão de uma imagem Docker no Docker Hub ou no GitHub Container Registry (GHCR)."""
+    
+    # Verifica se o repositório é do GitHub Container Registry (GHCR) ou Docker Hub
+    if repo_name.startswith('ghcr.io'):
+        tags_url = f'https://ghcr.io/v2/{repo_name}/tags/list'
+    else:
+        tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
+    
     try:
         response = requests.get(tags_url)
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
-        tags = response.json().get('results', [])
+        tags = response.json().get('tags', []) if 'ghcr.io' in tags_url else response.json().get('results', [])
+        
         # Filtra as tags que têm números e não contêm "nvidia" ou "lite"
         version_tags = [
-            tag['name'] for tag in tags
-            if any(char.isdigit() for char in tag['name']) and
-               "nvidia" not in tag['name'].lower() and
-               "lite" not in tag['name'].lower()
-        ]
+            tag for tag in tags
+            if any(char.isdigit() for char in tag)]
         return sorted(version_tags, reverse=True)[0] if version_tags else None
     except requests.exceptions.RequestException as e:
-        print(f"Erro ao acessar o Docker Hub: {e}")
+        print(f"Erro ao acessar o repositório {repo_name}: {e}")
         return None
 
 def process_file(file_path, file_format):
@@ -35,7 +39,7 @@ def process_file(file_path, file_format):
                 return
 
         if 'image' in config and 'version' in config:
-            print(f"Obtendo a última versão da imagem {config['image']} do Docker Hub")
+            print(f"Obtendo a última versão da imagem {config['image']}")
             latest_tag = get_latest_tag(config['image'])
             if latest_tag:
                 print(f"Última versão de {config['image']} é {latest_tag}")
