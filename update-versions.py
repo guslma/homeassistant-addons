@@ -14,8 +14,7 @@ def get_latest_tag(repo_name):
         
         # Filtra as tags que têm números e não contêm "nvidia" ou "lite"
         version_tags = [
-            tag['name'] if 'jammy' not in tag['name'].lower() else '120'
-            for tag in tags
+            tag['name'] for tag in tags
             if any(char.isdigit() for char in tag['name']) and
                "nvidia" not in tag['name'].lower() and
                "lite" not in tag['name'].lower()
