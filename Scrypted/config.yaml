@@ -1,48 +1,32 @@
 arch:
-- amd64
-- aarch64
+  - armv7
+  - amd64
+  - aarch64
 backup_exclude:
-- '*/server/**'
-- '*/scrypted_nvr/**'
-- '*/scrypted_data/plugins/**'
-description: Scrypted is a high performance home video integration and automation
-  platform
-devices:
-- /dev/mem
-- /dev/dri/renderD128
-- /dev/apex_0
-- /dev/apex_1
-- /dev/apex_2
-- /dev/apex_3
-- /dev/dri/card0
-- /dev/vchiq
-- /dev/video10
-- /dev/video0
-environment:
-  SCRYPTED_ADMIN_ADDRESS: 172.30.32.2
-  SCRYPTED_ADMIN_USERNAME: homeassistant
-  SCRYPTED_INSTALL_ENVIRONMENT: ha
-  SCRYPTED_INSTALL_PLUGIN: '@scrypted/homeassistant'
-  SCRYPTED_NVR_VOLUME: /data/scrypted_nvr
-  SCRYPTED_VOLUME: /data/scrypted_data
-gpio: true
-hassio_api: true
-homeassistant_api: true
+  - node_modules
+description: Scrypted - A high-performance home automation hub.
 host_network: true
-image: koush/scrypted
-ingress: true
-ingress_port: 11080
-ingress_stream: true
+image: ghcr.io/koush/scrypted
 init: false
 map:
-- path: /scrypted_data
-  read_only: false
-  type: addon_config
+  - path: /nvr
+    read_only: false
+    type: media
+  - path: /config/scrypted
+    read_only: false
+    type: addon_config
+  - path: /var/run/dbus
+    read_only: false
+    type: host
+  - path: /var/run/avahi-daemon/socket
+    read_only: false
+    type: host
 name: Scrypted
-panel_icon: mdi:memory
+ports:
+  10444/tcp: 10444
+ports_description:
+  10444/tcp: Scrypted Webhook
 slug: scrypted
-uart: true
 url: https://github.com/koush/scrypted
-usb: true
-version: v0.123.38-jammy-nvidia
-video: true
+version: '2024-11-26'
+webui: http://[HOST]:[PORT:10444]
