@@ -9,12 +9,14 @@ host_network: true
 image: ghcr.io/koush/scrypted
 init: false
 map:
-  config: true
-  media: true
-  ssl: false
-  backup: false
-  share: false
-  addons: false
+  - path: /config/scrypted
+    type: addon_config
+  - path: /nvr
+    type: media
+  - path: /var/run/dbus
+    type: host
+  - path: /var/run/avahi-daemon/socket
+    type: host
 options:
   nvr_path: /nvr
   config_path: /config/scrypted
