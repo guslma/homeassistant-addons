@@ -9,7 +9,7 @@ host_network: true
 image: ghcr.io/koush/scrypted
 init: false
 map:
-- path: /homebridge
+- path: /scrypted
   read_only: false
   type: addon_config
 name: Scrypted
@@ -19,5 +19,5 @@ ports_description:
   10444/tcp: Scrypted Webhook
 slug: scrypted
 url: https://github.com/koush/scrypted
-version: '2024-11-26'
+version: 'v0.120.0-jammy-full'
 webui: http://[HOST]:[PORT:10444]
