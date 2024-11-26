@@ -35,7 +35,7 @@ ingress_port: 11080
 ingress_stream: true
 init: false
 map:
-- path: /scrypted
+- path: /scrypted_data
   read_only: false
   type: addon_config
 name: Scrypted
