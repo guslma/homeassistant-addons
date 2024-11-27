@@ -10,11 +10,11 @@ This repository contains the following add-ons:
 
 _Homebridge - HomeKit support for the impatient._
 
-### [MySpeed](./MySpeed) [![Docker Pulls](https://img.shields.io/docker/pulls/germannewsmaker/myspeed.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/germannewsmaker/myspeed)
+### [MySpeed](./myspeed) [![Docker Pulls](https://img.shields.io/docker/pulls/germannewsmaker/myspeed.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/germannewsmaker/myspeed)
 
 _MySpeed - Is a speed test analysis._
 
-### [Scrypted](./Scrypted) [![Docker Pulls](https://img.shields.io/docker/pulls/koush/scrypted.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koush/scrypted)
+### [Scrypted](./scrypted) [![Docker Pulls](https://img.shields.io/docker/pulls/koush/scrypted.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koush/scrypted)
 
 _Scrypted - Can bridge most cameras to the three major home hubs._
 
