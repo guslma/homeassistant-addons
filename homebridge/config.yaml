@@ -7,7 +7,7 @@ host_network: true
 image: homebridge/homebridge
 init: false
 map:
-- path: /config/homebridge
+- path: /homebridge
   read_only: false
   type: addon_config
 name: Homebridge
