@@ -1,7 +1,8 @@
 arch:
 - armv7
 - amd64
-backup_exclude: []
+backup_exclude:
+- node_modules
 description: Homebridge - HomeKit support for the impatient
 host_network: true
 image: homebridge/homebridge
