@@ -16,7 +16,6 @@ def get_latest_tag(repo_name):
         version_tags = [
             tag['name'] for tag in tags
             if any(char.isdigit() for char in tag['name']) and
-               "nvidia" not in tag['name'].lower() and
                "lite" not in tag['name'].lower()
         ]
 
