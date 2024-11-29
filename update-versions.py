@@ -10,10 +10,23 @@ def get_latest_and_previous_tag(repo_name):
         response = requests.get(tags_url)
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
         tags = response.json().get('results', [])
-    
+        
+        # Filtra as tags que têm números e não contêm "nvidia" ou "lite"
+        version_tags = [
+            tag['name'] for tag in tags
+            if any(char.isdigit() for char in tag['name']) and
+               "lite" not in tag['name'].lower() and
+               "nvidia" not in tag['name'].lower()
+        ]
 
-        # Ordena as tags em ordem decrescente e retorna a última e a anterior, se existirem
+        if not version_tags:
+            print(f"Nenhuma tag válida encontrada para {repo_name}.")
+            return None, None
+
+        # Ordena as tags em ordem decrescente
         version_tags = sorted(version_tags, reverse=True)
+
+        # Verifica se a tag "latest" está na lista
         if 'latest' in version_tags:
             latest_index = version_tags.index('latest')
             # Verifica se há uma tag anterior à "latest"
@@ -23,9 +36,12 @@ def get_latest_and_previous_tag(repo_name):
                 print("Não há versão anterior à 'latest'.")
                 return None, version_tags[latest_index]
         elif version_tags:
+            # Retorna a última e a segunda última versão
             return version_tags[0], version_tags[1] if len(version_tags) > 1 else None
         else:
+            print(f"Nenhuma tag encontrada para {repo_name}.")
             return None, None
+
     except requests.exceptions.RequestException as e:
         print(f"Erro ao acessar o Docker Hub: {e}")
         return None, None
