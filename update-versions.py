@@ -11,13 +11,11 @@ def get_latest_and_previous_tag(repo_name):
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
         tags = response.json().get('results', [])
 
-        # Inclui todas as tags e filtra somente aquelas que contêm números
-        version_tags = [
-            tag['name'] for tag in tags if any(char.isdigit() for char in tag['name'])
-        ]
+        # Inclui todas as tags sem filtros adicionais
+        version_tags = [tag['name'] for tag in tags]
 
         if not version_tags:
-            print(f"Nenhuma tag com números encontrada para {repo_name}.")
+            print(f"Nenhuma tag encontrada para {repo_name}.")
             return None, None
 
         # Ordena as tags em ordem decrescente
