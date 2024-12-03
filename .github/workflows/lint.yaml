@@ -13,7 +13,7 @@ on:
 jobs:
   find:
     name: Find add-ons
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     outputs:
       addons: ${{ steps.addons.outputs.addons_list }}
     steps:
