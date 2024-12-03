@@ -15,10 +15,10 @@ map:
   type: addon_config
 name: Scrypted
 ports:
-  11080/tcp: 11080
+  10443/tcp: 10443
 ports_description:
-  11080/tcp: Scrypted UI
+  10443/tcp: Scrypted UI
 slug: scrypted
 url: https://github.com/koush/scrypted
 version: v0.122.0-jammy-full
-webui: http://[HOST]:[PORT:11080]
+webui: http://[HOST]:[PORT:10443]
