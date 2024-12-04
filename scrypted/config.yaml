@@ -9,7 +9,7 @@ arch:
   - aarch64
 init: false
 ingress: true
-ingress_port: 10443
+ingress_port: 11080
 panel_icon: mdi:memory
 hassio_api: true
 homeassistant_api: true
