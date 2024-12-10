@@ -1,23 +1,24 @@
 name: "Pi-hole"
-version: "2024.07.0"
+version: "1.0"
 slug: "pihole"
 description: "Adiciona um bloqueador de anúncios usando Pi-hole."
-init: true
-host_network: true
-privileged: true
 arch:
   - amd64
   - armv7
-  - aarch64
+  - arm64
 startup: services
+boot: auto
 ports:
   53/tcp: 53
   53/udp: 53
-  80/tcp: 8800
+  80/tcp: 80
   67/udp: 67
 environment:
   TZ: "America/Chicago"
   WEBPASSWORD: "sua_senha_segura"
+host_network: true
+privileged:
+  - NET_ADMIN
 map:
   - config
   - ssl
@@ -25,8 +26,7 @@ map:
   - backup
   - share
 options:
-  password: "pihole"
+  password: "sua_senha_segura"
 schema:
   password: str
-image: "pihole/pihole"
-webui: http://[HOST]:[PORT:8800]
+image: "pihole/pihole:latest"
