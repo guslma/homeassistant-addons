@@ -5,9 +5,8 @@ description: "Adiciona um bloqueador de anúncios usando Pi-hole."
 arch:
   - amd64
   - armv7
-  - arm64
+  - aarch64
 startup: services
-boot: auto
 ports:
   53/tcp: 53
   53/udp: 53
