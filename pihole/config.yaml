@@ -1,5 +1,5 @@
 name: "Pi-hole"
-version: "1.0"
+version: "2024.07.0"
 slug: "pihole"
 description: "Adiciona um bloqueador de anúncios usando Pi-hole."
 arch:
@@ -28,4 +28,4 @@ options:
   password: "sua_senha_segura"
 schema:
   password: str
-image: "pihole/pihole:latest"
+image: "pihole/pihole"
