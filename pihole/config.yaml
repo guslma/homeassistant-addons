@@ -9,7 +9,7 @@ arch:
   - amd64
   - armhf
   - armv7
-ingress: true
+webui: http://[HOST]:[PORT:80]
 ingress_port: 80
 ingress_entry: /admin/
 panel_icon: mdi:pi-hole
