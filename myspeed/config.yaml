@@ -23,3 +23,5 @@ ingress: true
 ingress_port: 5216
 panel_icon: mdi:speedometer
 ingress_stream: true
+hassio_api: true
+homeassistant_api: true
