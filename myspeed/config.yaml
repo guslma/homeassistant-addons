@@ -19,4 +19,5 @@ ports_description:
 slug: myspeed
 url: https://hub.docker.com/r/germannewsmaker/myspeed
 version: '1.0.9'
-webui: http://[HOST]:[PORT:5216]
+ingress: true
+ingress_port: 5216
