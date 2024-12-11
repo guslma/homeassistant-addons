@@ -12,9 +12,13 @@ map:
   read_only: false
   type: addon_config
 name: MySpeed
+ports:
+  5216/tcp: 5216
+ports_description:
+  5216/tcp: MySpeed
 slug: myspeed
 url: https://hub.docker.com/r/germannewsmaker/myspeed
 version: '1.0.9'
+webui: http://[HOST]:[PORT:5216]
 ingress: true
 ingress_port: 5216
-panel_icon: mdi:speedometer
