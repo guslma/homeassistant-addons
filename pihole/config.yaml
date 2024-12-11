@@ -9,7 +9,6 @@ arch:
   - amd64
   - armhf
   - armv7
-webui: "[PROTO:ssl]://[HOST]:[PORT:80]"
 ingress: true
 ingress_port: 80
 ingress_entry: /admin/
@@ -23,7 +22,6 @@ ports_description:
   "53/tcp": DNS server port
   "53/udp": DNS server port
   "80/tcp": UNPROTECTED web UI (not required for Ingress)
-boot: auto
 timeout: 60
 options:
   dnscrypt: []
