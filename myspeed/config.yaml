@@ -19,6 +19,5 @@ ports_description:
 slug: myspeed
 url: https://hub.docker.com/r/germannewsmaker/myspeed
 version: '1.0.9'
-ingress_port: 5216
 panel_icon: mdi:speedometer
 webui: http://[HOST]:[PORT:5216]
