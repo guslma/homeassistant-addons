@@ -16,7 +16,7 @@ environment:
   WEBPASSWORD: "sua_senha_segura"
 ports:
   53/udp: 53
-  80/tcp: null
+  80/tcp: 80
 ports_description:
   53/udp: DNS server port
   80/tcp: Web interface (Not required for Ingress)
