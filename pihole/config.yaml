@@ -30,3 +30,4 @@ schema:
     - name: str
       stamp: str
 init: false
+webui: http://[HOST]:[PORT:80]
