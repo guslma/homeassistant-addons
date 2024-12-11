@@ -21,4 +21,5 @@ url: https://hub.docker.com/r/germannewsmaker/myspeed
 version: '1.0.9'
 ingress: true
 ingress_port: 5216
+ingress_entry: /admin/
 panel_icon: mdi:speedometer
