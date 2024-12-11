@@ -1,31 +1,31 @@
-name: "Pi-hole"
-version: "2024.07.0"
-slug: "pihole"
-description: "Adiciona um bloqueador de anúncios usando Pi-hole."
+name: Pi-hole
+version: development
+slug: pihole
+description: "Adiciona um bloqueador de an\xFAncios usando Pi-hole."
 arch:
-  - amd64
-  - armv7
-  - aarch64
+- amd64
+- armv7
+- aarch64
 startup: services
 ports:
   53/tcp: 53
   53/udp: 53
-  80/tcp: 80  # Porta padrão para a interface web
+  80/tcp: 80
   67/udp: 67
 environment:
-  TZ: "America/Chicago"
-  WEBPASSWORD: "sua_senha_segura"
+  TZ: America/Chicago
+  WEBPASSWORD: sua_senha_segura
 host_network: true
 privileged:
-  - NET_ADMIN
+- NET_ADMIN
 map:
-  - config
-  - ssl
-  - addons
-  - backup
-  - share
+- config
+- ssl
+- addons
+- backup
+- share
 options:
-  password: "sua_senha_segura"
+  password: sua_senha_segura
 schema:
   password: str
-image: "pihole/pihole"
+image: pihole/pihole
