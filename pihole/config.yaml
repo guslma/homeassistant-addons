@@ -10,14 +10,14 @@ arch:
   - armhf
   - armv7
 ingress: true
-ingress_port: 8800
+ingress_port: 80
 ingress_entry: /admin/
 panel_icon: mdi:pi-hole
 startup: system
 ports:
   "53/tcp": 53
   "53/udp": 53
-  "8800/tcp": null
+  "80/tcp": null
 ports_description:
   "53/tcp": DNS server port
   "53/udp": DNS server port
