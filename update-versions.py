@@ -19,7 +19,7 @@ def get_latest_and_previous_tag(repo_name):
             return None, None
 
         # Ordena as tags em ordem decrescente
-        version_tags = sorted(version_tags, reverse=True)
+        version_tags = sorted(version_tags, reverse=False)
 
         # Verifica se a tag "latest" está na lista e encontra a versão anterior
         if 'latest' in version_tags:
