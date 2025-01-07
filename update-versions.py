@@ -2,6 +2,7 @@ import os
 import json
 import yaml
 import requests
+import re
 
 def get_latest_and_previous_tag(repo_name):
     """Obtém a tag 'latest' e a versão anterior de uma imagem Docker no Docker Hub."""
@@ -11,20 +12,24 @@ def get_latest_and_previous_tag(repo_name):
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
         tags = response.json().get('results', [])
         
-        # Inclui todas as tags, sem filtrar apenas tags com números
+        # Inclui todas as tags
         version_tags = [tag['name'] for tag in tags]
 
         if not version_tags:
             print(f"Nenhuma tag encontrada para {repo_name}.")
             return None, None
 
-        # Ordena as tags em ordem decrescente
-        version_tags = sorted(version_tags, reverse=True)
+        # Função para identificar se uma tag contém números
+        def contains_numbers(tag):
+            return bool(re.search(r'\d', tag))
+
+        # Ordena priorizando tags com números
+        version_tags.sort(key=lambda x: (not contains_numbers(x), x), reverse=True)
 
         # Verifica se a tag "latest" está na lista e encontra a versão anterior
         if 'latest' in version_tags:
             latest_index = version_tags.index('latest')
-            if latest_index > 0:
+            if latest_index + 1 < len(version_tags):
                 # Retorna a versão anterior à "latest"
                 return version_tags[latest_index + 1], 'latest'
             else:
