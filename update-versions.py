@@ -5,25 +5,26 @@ import requests
 import re
 
 def get_latest_and_previous_tag(repo_name):
-    """Obtém a tag 'latest' e a versão anterior de uma imagem Docker no Docker Hub, ignorando tags inválidas."""
+    """Obtém a tag 'latest' e a versão anterior de uma imagem Docker no Docker Hub, ignorando tags indesejadas."""
     tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
     try:
         response = requests.get(tags_url)
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
         tags = response.json().get('results', [])
         
-        # Filtra tags que possuem números, com ou sem palavras adicionais (ex.: 1.0, 1.0-full, mas ignora 'full' ou 'beta')
+        # Filtra tags válidas: devem conter números e não podem conter padrões indesejados (ex.: -nvidia)
+        excluded_patterns = ['nvidia', 'beta']  # Adicione padrões a serem excluídos
         version_tags = [
-            tag['name'] 
-            for tag in tags 
-            if re.search(r'\d', tag['name'])  # Verifica se contém algum número
+            tag['name']
+            for tag in tags
+            if re.search(r'\d', tag['name']) and not any(excl in tag['name'] for excl in excluded_patterns)
         ]
 
         if not version_tags:
             print(f"Nenhuma tag válida encontrada para {repo_name}.")
             return None, None
 
-        # Ordena as tags alfabeticamente, para que números fiquem antes de palavras
+        # Ordena as tags alfabeticamente em ordem decrescente
         version_tags = sorted(version_tags, reverse=True)
 
         # Verifica se a tag "latest" está na lista de todas as tags
