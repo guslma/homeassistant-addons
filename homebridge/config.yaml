@@ -8,8 +8,10 @@ host_network: true
 image: homebridge/homebridge
 init: false
 map:
-- path: /homebridge
-  type: addon_config
+- homeassistant_config:rw
+- media:rw
+- share:rw
+- ssl:rw
 name: Homebridge
 ports:
   8581/tcp: 8581
