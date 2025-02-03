@@ -9,7 +9,6 @@ image: homebridge/homebridge
 init: false
 map:
 - path: /homebridge
-  read_only: false
   type: addon_config
 name: Homebridge
 ports:
