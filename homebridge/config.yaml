@@ -6,7 +6,6 @@ backup_exclude:
 description: Homebridge - HomeKit support for the impatient
 host_network: true
 image: homebridge/homebridge
-init: true
 map:
   - path: /homebridge
     read_only: false
