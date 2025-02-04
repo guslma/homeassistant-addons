@@ -11,6 +11,10 @@ map:
 - path: /myspeed/data
   read_only: false
   type: addon_config
+- homeassistant_config:rw
+- media:rw
+- share:rw
+- ssl:rw
 name: MySpeed
 ports:
   5216/tcp: 5216
