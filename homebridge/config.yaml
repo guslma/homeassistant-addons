@@ -7,10 +7,22 @@ description: Homebridge - HomeKit support for the impatient
 host_network: true
 image: homebridge/homebridge
 init: false
-map:
-- type: addon_config
-  read_only: false
-  path: /homebridge
+  "map": [
+    {
+      "type": "share",
+      "read_only": false
+    },
+    {
+      "type": "homeassistant_config",
+      "read_only": false,
+      "path": "/config"
+    },
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/addon_config/homebridge"
+    }
+  ],
 name: Homebridge
 ports:
   8581/tcp: 8581
