@@ -6,11 +6,9 @@ backup_exclude:
 description: "Homebridge - HomeKit support for the impatient"
 host_network: true
 image: "homebridge/homebridge"
-init: true
 map:
   - share
-  - config:rw
-  - addon_config:rw
+  - homeassistant_config:rw
 options:
   data_path: "/config/homebridge"
 schema:
