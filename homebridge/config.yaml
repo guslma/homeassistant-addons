@@ -1,21 +1,22 @@
 arch:
-  - armv7
-  - amd64
+- armv7
+- amd64
 backup_exclude:
-  - node_modules
-description: "Homebridge - HomeKit support for the impatient"
+- node_modules
+description: Homebridge - HomeKit support for the impatient
 host_network: true
-image: "homebridge/homebridge"
+image: homebridge/homebridge
+init: false
 map:
-  - addon_config:rw  # Garante que a pasta persistente do add-on esteja disponível
-options:
-  data_path: "/homebridge"  # Define explicitamente a pasta usada pelo Homebridge
-name: "Homebridge"
+- type: addon_config
+  read_only: false
+  path: /homebridge
+name: Homebridge
 ports:
-  "8581/tcp": 8581
+  8581/tcp: 8581
 ports_description:
-  "8581/tcp": "Homebridge UI"
-slug: "homebridge"
-url: "https://hub.docker.com/r/homebridge/homebridge"
-version: "2025-01-11"
-webui: "http://[HOST]:[PORT:8581]"
+  8581/tcp: Homebridge UI
+slug: homebridge
+url: https://hub.docker.com/r/homebridge/homebridge
+version: '2025-01-11'
+webui: http://[HOST]:[PORT:8581]
