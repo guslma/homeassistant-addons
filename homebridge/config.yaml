@@ -1,22 +1,22 @@
+
 arch:
-- armv7
-- amd64
+  - armv7
+  - amd64
 backup_exclude:
-- node_modules
-description: Homebridge - HomeKit support for the impatient
-host_network: true
-image: homebridge/homebridge
-init: false
+  - node_modules
+description: "Homebridge - HomeKit support for the impatient"
+image: "homebridge/homebridge"
+init: false  # Home Assistant já cuida do gerenciamento do contêiner
 map:
-- path: /homebridge
-  read_only: false
-  type: addon_config
-name: Homebridge
+  - homeassistant_config:rw  # Acesso de leitura e escrita ao diretório de configuração do Home Assistant
+options:
+  data_path: "/config/homebridge"  # Homebridge usa essa pasta
+name: "Homebridge"
 ports:
-  8581/tcp: 8581
+  "8581/tcp": 8581
 ports_description:
-  8581/tcp: Homebridge UI
-slug: homebridge
-url: https://hub.docker.com/r/homebridge/homebridge
-version: '2025-01-11'
-webui: http://[HOST]:[PORT:8581]
+  "8581/tcp": "Homebridge UI"
+slug: "homebridge"
+url: "https://hub.docker.com/r/homebridge/homebridge"
+version: "2025-01-11"
+webui: "http://[HOST]:[PORT:8581]"
