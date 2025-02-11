@@ -20,9 +20,15 @@ init: false
     {
       "type": "addon_config",
       "read_only": false,
-      "path": "/addon_config/homebridge"
+      "path": "/addon_config"
     }
   ],
+  "options": {
+    "data_path": "/config/homebridge"
+    },
+  "schema": {
+    "data_path": "str"
+    },
 name: Homebridge
 ports:
   8581/tcp: 8581
