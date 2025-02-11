@@ -7,7 +7,7 @@ description: Homebridge - HomeKit support for the impatient
 host_network: true
 image: homebridge/homebridge
 init: false
-  "map": [
+map: [
     {
       "type": "share",
       "read_only": false
@@ -23,10 +23,10 @@ init: false
       "path": "/addon_config"
     }
   ],
-  "options": {
+options: {
     "data_path": "/config/homebridge"
     },
-  "schema": {
+schema: {
     "data_path": "str"
     },
 name: Homebridge
