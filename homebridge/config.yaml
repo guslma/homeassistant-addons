@@ -1,28 +1,26 @@
 arch:
-- armv7
-- amd64
+  - armv7
+  - amd64
 backup_exclude:
-- node_modules
-description: Homebridge - HomeKit support for the impatient
+  - node_modules
+description: "Homebridge - HomeKit support for the impatient"
 host_network: true
-image: homebridge/homebridge
-init: false
+image: "homebridge/homebridge"
+init: true
 map:
   - share
   - config:rw
   - addon_config:rw
-options: {
-    "data_path": "/config/homebridge"
-    },
-schema: {
-    "data_path": "str"
-    },
-name: Homebridge
+options:
+  data_path: "/config/homebridge"
+schema:
+  data_path: "str"
+name: "Homebridge"
 ports:
-  8581/tcp: 8581
+  "8581/tcp": 8581
 ports_description:
-  8581/tcp: Homebridge UI
-slug: homebridge
-url: https://hub.docker.com/r/homebridge/homebridge
-version: '2025-01-11'
-webui: http://[HOST]:[PORT:8581]
+  "8581/tcp": "Homebridge UI"
+slug: "homebridge"
+url: "https://hub.docker.com/r/homebridge/homebridge"
+version: "2025-01-11"
+webui: "http://[HOST]:[PORT:8581]"
