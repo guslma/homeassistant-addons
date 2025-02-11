@@ -5,11 +5,11 @@ backup_exclude:
   - node_modules
 description: "Homebridge - HomeKit support for the impatient"
 image: "homebridge/homebridge"
-full_access: true  # Dá mais permissões ao contêiner, se necessário
+init: false  # Home Assistant já cuida do gerenciamento do contêiner
 map:
-  - addon_config:rw  # Configuração persistente para o Homebridge
+  - homeassistant_config:rw  # Acesso de leitura e escrita ao diretório de configuração do Home Assistant
 options:
-  data_path: "/homebridge"  # Homebridge sempre usará esta pasta
+  data_path: "/homebridge"  # Homebridge usa essa pasta
 name: "Homebridge"
 ports:
   "8581/tcp": 8581
