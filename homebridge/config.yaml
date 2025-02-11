@@ -3,8 +3,6 @@
   "version": "2025-01-11",
   "slug": "homebridge",
   "description": "Homebridge - HomeKit support for the impatient",
-  "uart": true,
-  "udev": true,
   "url": "https://hub.docker.com/r/homebridge/homebridge",
   "arch": [
     "amd64",
@@ -37,7 +35,7 @@
     "8581/tcp": "Homebridge UI"
   },
   "options": {
-    "data_path": "/config/homebridge"
+    "data_path": "/homebridge"
   },
   "schema": {
     "data_path": "str"
