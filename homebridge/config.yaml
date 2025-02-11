@@ -41,6 +41,6 @@
   },
   "schema": {
     "data_path": "str"
-  }
+  },
   "image": "homebridge/homebridge"
 }
