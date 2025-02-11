@@ -7,8 +7,9 @@ description: "Homebridge - HomeKit support for the impatient"
 host_network: true
 image: "homebridge/homebridge"
 map:
-  - addon_config:rw
-  - homeassistant_config:rw
+  - addon_config:rw  # Garante que a pasta persistente do add-on esteja disponível
+options:
+  data_path: "/homebridge"  # Define explicitamente a pasta usada pelo Homebridge
 name: "Homebridge"
 ports:
   "8581/tcp": 8581
