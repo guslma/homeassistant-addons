@@ -7,7 +7,7 @@ description: "Homebridge - HomeKit support for the impatient"
 host_network: true
 image: "homebridge/homebridge"
 map:
-  - addon_config
+  - addon_config:rw
   - homeassistant_config:rw
 name: "Homebridge"
 ports:
