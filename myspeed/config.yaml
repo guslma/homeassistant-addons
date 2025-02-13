@@ -1,16 +1,16 @@
 arch:
-- armv7
-- amd64
+  - armv7
+  - amd64
 backup_exclude:
-- node_modules
+  - node_modules
 description: A speed test analysis software that shows your internet speed for up to 30 days
 host_network: true
 image: germannewsmaker/myspeed
 init: false
 map:
-- path: /myspeed/data
-  read_only: false
-  type: addon_config
+  - path: /myspeed/data
+    read_only: false
+    type: addon_config
 name: MySpeed
 ports:
   5216/tcp: 5216
