@@ -8,9 +8,11 @@ host_network: true
 image: homebridge/homebridge
 init: false
 map:
-- type: addon_config
-  read_only: false
-  path: /homebridge
+  - type: addon_config
+    read_only: false
+    path: /homebridge
+  - type: share
+    read_only: false
 name: Homebridge
 ports:
   8581/tcp: 8581
