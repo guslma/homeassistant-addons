@@ -1,12 +1,10 @@
 arch:
   - armv7
-  - arm64
   - amd64
 backup_exclude: []
 description: Homebridge - HomeKit support for the impatient
 host_network: true
 image: homebridge/homebridge
-init: true
 map:
   - type: addon_config
     read_only: false
