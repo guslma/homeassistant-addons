@@ -5,6 +5,7 @@
 ![Supports armhf Architecture][armhf-shield]
 ![Supports armv7 Architecture][armv7-shield]
 ![Supports i386 Architecture][i386-shield]
+![Supports arm64 Architecture][arm64-shield]
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/homebridge/homebridge.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/homebridge/homebridge)
 
@@ -33,3 +34,4 @@ https://hub.docker.com/r/homebridge/homebridge
 [armhf-shield]: https://img.shields.io/badge/armhf-no-red.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg
+[arm64-shield]: https://img.shields.io/badge/arm64-yes-green.svg
