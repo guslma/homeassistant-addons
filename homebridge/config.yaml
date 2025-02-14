@@ -4,6 +4,7 @@ arch:
 backup_exclude: []
 description: Homebridge - HomeKit support for the impatient
 host_network: true
+init: false
 image: homebridge/homebridge
 map:
   - type: addon_config
