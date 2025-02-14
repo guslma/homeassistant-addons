@@ -1,18 +1,22 @@
 arch:
   - armv7
+  - arm64
   - amd64
-backup_exclude:
-  - node_modules
+backup_exclude: []
 description: Homebridge - HomeKit support for the impatient
 host_network: true
 image: homebridge/homebridge
-init: false
+init: true
 map:
   - type: addon_config
     read_only: false
     path: /homebridge
   - type: share
     read_only: false
+  - type: config
+    read_only: false
+  - type: ssl
+    read_only: true
 name: Homebridge
 ports:
   8581/tcp: 8581
