@@ -9,10 +9,6 @@ map:
 - type: addon_config
   read_only: false
   path: /homebridge
-- type: share
-  read_only: false
-- type: config
-  read_only: false
 name: Homebridge
 ports:
   8581/tcp: 8581
