@@ -14,8 +14,6 @@ map:
   read_only: false
 - type: config
   read_only: false
-- type: ssl
-  read_only: true
 name: Homebridge
 ports:
   8581/tcp: 8581
