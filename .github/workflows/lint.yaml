@@ -85,3 +85,4 @@ jobs:
         uses: JasonEtco/create-an-issue@v2
         with:
           filename: .github/ISSUE_TEMPLATE/success-lint.md
+          token: ${{ secrets.GITHUB_TOKEN }}
