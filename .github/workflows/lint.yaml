@@ -21,7 +21,7 @@ jobs:
 
       - name: 🔍 Filtrar add-ons modificados
         id: filter
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         with:
           filters: |
             addons:
