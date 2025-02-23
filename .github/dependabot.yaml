@@ -5,3 +5,12 @@ updates:
     schedule:
       interval: daily
       time: "06:00"
+    groups:
+      actions:
+        patterns:
+          - "*"
+    reviewers:
+      - "guslma"
+    labels:
+      - "dependabot"
+      - "github-actions"
