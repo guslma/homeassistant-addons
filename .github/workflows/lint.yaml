@@ -64,14 +64,24 @@ jobs:
         with:
           path: "./${{ matrix.path }}"
 
-  notify:
+  notify_failure:
     runs-on: ubuntu-latest
     needs: [lint]
     if: failure()
     steps:
-      - name: 🔔 Criar Issue no GitHub
+      - name: 🔔 Criar Issue no GitHub para Falha
         uses: JasonEtco/create-an-issue@v2
         with:
           title: "🚨 Falha no Lint dos Add-ons"
           body: "O GitHub Actions detectou falhas no lint dos add-ons. Verifique o log para mais detalhes."
           labels: "bug, lint"
+
+  notify_success:
+    runs-on: ubuntu-latest
+    needs: [lint]
+    if: success()
+    steps:
+      - name: 🎉 Criar Issue no GitHub para Sucesso
+        uses: JasonEtco/create-an-issue@v2
+        with:
+          filename: .github/ISSUE_TEMPLATE/success-lint.md
