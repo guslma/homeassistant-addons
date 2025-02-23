@@ -21,7 +21,7 @@ jobs:
 
       - name: 🔍 Filtrar add-ons modificados
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v2
         with:
           filters: |
             addons:
@@ -64,14 +64,26 @@ jobs:
         with:
           path: "./${{ matrix.path }}"
 
-  notify:
+  notify_failure:
     runs-on: ubuntu-latest
     needs: [lint]
     if: failure()
     steps:
-      - name: 🔔 Criar Issue no GitHub
+      - name: 🔔 Criar Issue no GitHub para Falha
         uses: JasonEtco/create-an-issue@v2
         with:
           title: "🚨 Falha no Lint dos Add-ons"
           body: "O GitHub Actions detectou falhas no lint dos add-ons. Verifique o log para mais detalhes."
           labels: "bug, lint"
+
+  notify_success:
+    runs-on: ubuntu-latest
+    needs: [lint]
+    if: success()
+    steps:
+      - name: 🎉 Criar Issue no GitHub para Sucesso
+        uses: JasonEtco/create-an-issue@v2
+        with:
+          title: "✅ Lint bem-sucedido nos Add-ons!"
+          body: "O GitHub Actions finalizou o linting dos add-ons com sucesso. Nenhum erro foi encontrado! 🚀"
+          labels: "success"
