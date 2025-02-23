@@ -64,14 +64,38 @@ jobs:
         with:
           path: "./${{ matrix.path }}"
 
-  notify:
+  notify_failure:
     runs-on: ubuntu-latest
     needs: [lint]
     if: failure()
     steps:
-      - name: 🔔 Criar Issue no GitHub
+      - name: 🔔 Criar Issue no GitHub para Falha
         uses: JasonEtco/create-an-issue@v2
         with:
           title: "🚨 Falha no Lint dos Add-ons"
           body: "O GitHub Actions detectou falhas no lint dos add-ons. Verifique o log para mais detalhes."
           labels: "bug, lint"
+
+  notify_success:
+    runs-on: ubuntu-latest
+    needs: [lint]
+    if: success()
+    steps:
+      - name: 🎉 Criar Issue no GitHub para Sucesso
+        uses: JasonEtco/create-an-issue@v2
+        with:
+          title: "✅ Lint bem-sucedido nos Add-ons!"
+          body: "O GitHub Actions finalizou o linting dos add-ons com sucesso. Nenhum erro foi encontrado! 🚀"
+          labels: "success"
+
+  notify_no_failure:
+    runs-on: ubuntu-latest
+    needs: [lint]
+    if: success() && needs.notify_failure.result == 'failure'
+    steps:
+      - name: ✅ Criar Issue de 'Não encontrou falha'
+        uses: JasonEtco/create-an-issue@v2
+        with:
+          title: "✔️ Não Encontrada Falha nos Add-ons"
+          body: "O workflow completou sem falhas, mas não houve erros detectados no lint. Todos os add-ons parecem estar em bom estado."
+          labels: "no-error"
