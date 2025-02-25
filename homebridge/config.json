@@ -6,13 +6,14 @@
   "url": "https://hub.docker.com/r/homebridge/homebridge",
   "arch": [
     "armv7",
-    "aarch64",
-    "amd64"
+    "amd64",
+    "aarch64"
   ],
   "host_network": true,
   "image": "homebridge/homebridge",
   "init": false,
   "ingress": true,
+  "ingress_port": 8581,
   "panel_icon": "mdi:home-automation",
   "map": [
     {
@@ -31,7 +32,12 @@
       "path": "/config/homebridge"
     }
   ],
-  "ports": {},
+  "ports": {
+    "8581/tcp": 8581
+  },
+  "ports_description": {
+    "8581/tcp": "Frontend tcp-listen port"
+  },
   "options": {
     "data_path": "/config/homebridge"
   },
