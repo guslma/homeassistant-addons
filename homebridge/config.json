@@ -8,6 +8,7 @@
     "armv7",
     "amd64"
   ],
+  "host_network": true,
   "image": "homebridge/homebridge",
   "init": false,
   "ingress": true,
