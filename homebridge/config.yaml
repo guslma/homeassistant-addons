@@ -14,7 +14,7 @@ map:
   - path: /config/homebridge-backup
     read_only: false
     type: share
-name: Homebridgee
+name: Homebridge
 ports:
   8581/tcp: 8581
 ports_description:
