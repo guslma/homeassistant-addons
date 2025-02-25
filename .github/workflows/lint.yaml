@@ -19,43 +19,36 @@ jobs:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v4
 
-      - name: 🔍 Verificar arquivos modificados
-        run: |
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
-          
       - name: 🔍 Filtrar add-ons modificados
         id: filter
         uses: dorny/paths-filter@v3
         with:
           filters: |
             addons:
-              - '*/**'  # Aqui, ele verificará se qualquer pasta da raiz foi modificada
-              
+              - 'addons/**'
+
   find:
     name: Find add-ons
     runs-on: ubuntu-latest
     needs: filter
-    if: needs.filter.outputs.addons_changed != '' && needs.filter.outputs.addons_changed != 'null'
+    if: needs.filter.outputs.addons_changed != '[]'
     outputs:
       addons: ${{ steps.addons.outputs.addons_list }}
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 1  # Reduz o tamanho do checkout
 
-      - name: 🔍 Encontrar diretórios de add-ons
+      - name: 🔍 Find add-on directories
         id: addons
-        run: |
-          ADDONS_LIST=$(find . -maxdepth 1 -type d -name '*addon_name*/')  # Aqui, você pode ajustar o padrão de nome
-          echo "addons_list=$ADDONS_LIST" >> $GITHUB_ENV
-          echo "Found Add-ons: $ADDONS_LIST"
+        uses: home-assistant/actions/helpers/find-addons@master
 
   lint:
     name: Lint add-on ${{ matrix.path }}
     runs-on: ubuntu-latest
     needs: find
-    if: needs.find.outputs.addons != '' && needs.find.outputs.addons != 'null'
+    if: needs.find.outputs.addons != '[]'
     strategy:
       matrix:
         path: ${{ fromJson(needs.find.outputs.addons) }}
@@ -82,3 +75,4 @@ jobs:
           title: "🚨 Falha no Lint dos Add-ons"
           body: "O GitHub Actions detectou falhas no lint dos add-ons. Verifique o log para mais detalhes."
           labels: "bug, lint"
+          assignees: "guslma"
