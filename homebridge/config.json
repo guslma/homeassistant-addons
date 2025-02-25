@@ -12,7 +12,6 @@
   "image": "homebridge/homebridge",
   "init": false,
   "ingress": true,
-  "timeout": 30,
   "panel_icon": "mdi:home-automation",
   "map": [
     {
@@ -27,7 +26,8 @@
     },
     {
       "type": "share",
-      "read_only": false
+      "read_only": false,
+      "path": "/config/homebridge"
     }
   ],
   "ports": {},
