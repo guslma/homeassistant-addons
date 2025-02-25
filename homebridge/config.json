@@ -12,7 +12,6 @@
   "image": "homebridge/homebridge",
   "init": false,
   "ingress": true,
-  "ingress_port": 8581,
   "timeout": 30,
   "panel_icon": "mdi:home-automation",
   "map": [
@@ -31,12 +30,7 @@
       "read_only": false
     }
   ],
-  "ports": {
-    "8581/tcp": 8581
-  },
-  "ports_description": {
-    "8581/tcp": "Frontend tcp-listen port"
-  },
+  "ports": {},
   "options": {
     "data_path": "/config/homebridge"
   },
