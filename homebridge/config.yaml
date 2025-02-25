@@ -11,26 +11,22 @@ host_network: true
 image: "homebridge/homebridge"
 init: false
 ingress: true
-ingress_port: 8581
 hassio_api: true
 homeassistant_api: true
-ingress_stream: true
 panel_icon: "mdi:home-automation"
 map:
-  - type: "addon_config"
-    read_only: false
-    path: "/homebridge"
-  - type: "homeassistant_config"
-    read_only: false
-    path: "/config"
-  - type: "share"
-    read_only: false
-    path: "/config/homebridge"
-ports:
-  "8581/tcp": 8581
-ports_description:
-  "8581/tcp": "Frontend tcp-listen port"
+  - all_addon_configs:rw
+  - backup:rw
+  - homeassistant_config:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
 options:
-  data_path: "/config/homebridge"
+  dirsfirst: false
+  enforce_basepath: true
+  ssh_keys: []
 schema:
-  data_path: "str"
+  dirsfirst: bool
+  enforce_basepath: bool
+  ssh_keys:
+    - str
