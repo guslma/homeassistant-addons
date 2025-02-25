@@ -25,7 +25,7 @@ jobs:
         with:
           filters: |
             addons:
-              - 'addons/**'
+              - 'homeassistant-addons/**'
 
   find:
     name: Find add-ons
