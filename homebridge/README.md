@@ -17,7 +17,7 @@ Homebridge is a lightweight Node.js server you can run on your home network that
 
 Since Siri supports devices added through HomeKit, this means that with Homebridge you can ask Siri to control devices that don't have any support for HomeKit at all. For instance, using just some of the available plugins, you can say:
 
-Siri, unlock the back door. [pictured to the right]
+Siri, unlock the back door.
 
 Siri, open the garage door.
 
