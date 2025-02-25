@@ -1,32 +1,23 @@
-name: "Homebridge"
-version: "2025-02-16"
-slug: "homebridge"
-description: "Homebridge - HomeKit support for the impatient"
-url: "https://hub.docker.com/r/homebridge/homebridge"
 arch:
-  - "armv7"
-  - "amd64"
-  - "aarch64"
+- armv7
+- amd64
+- "aarch64"
+backup_exclude:
+- node_modules
+description: Homebridge - HomeKit support for the impatient
 host_network: true
-image: "homebridge/homebridge"
+image: homebridge/homebridge
 init: false
-ingress: true
-hassio_api: true
-homeassistant_api: true
-panel_icon: "mdi:home-automation"
 map:
-  - all_addon_configs:rw
-  - backup:rw
-  - homeassistant_config:rw
-  - media:rw
-  - share:rw
-  - ssl:rw
-options:
-  dirsfirst: false
-  enforce_basepath: true
-  ssh_keys: []
-schema:
-  dirsfirst: bool
-  enforce_basepath: bool
-  ssh_keys:
-    - str
+- path: /homebridge
+  read_only: false
+  type: addon_config
+name: Homebridge
+ports:
+  8581/tcp: 8581
+ports_description:
+  8581/tcp: Homebridge UI
+slug: homebridge
+url: https://hub.docker.com/r/homebridge/homebridge
+version: '2025-02-16'
+webui: http://[HOST]:[PORT:8581]
