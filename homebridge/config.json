@@ -32,12 +32,10 @@
     }
   ],
   "ports": {
-    "8581/tcp": 8581,
-    "8582/tcp": null
+    "8581/tcp": 8581
   },
   "ports_description": {
-    "8581/tcp": "Socat tcp-listen port",
-    "8582/tcp": "Frontend tcp-listen port"
+    "8581/tcp": "Frontend tcp-listen port"
   },
   "options": {
     "data_path": "/config/homebridge"
