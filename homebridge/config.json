@@ -12,6 +12,7 @@
   "image": "homebridge/homebridge",
   "init": false,
   "ingress": true,
+  "ingress_port": 8581,
   "timeout": 30,
   "panel_icon": "mdi:home-automation",
   "map": [
