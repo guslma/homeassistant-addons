@@ -1,12 +1,13 @@
 {
+  "name": "Homebridge",
+  "version": "2025-02-16",
+  "slug": "homebridge",
+  "description": "Homebridge - HomeKit support for the impatient",
+  "url": "https://hub.docker.com/r/homebridge/homebridge",
   "arch": [
     "armv7",
     "amd64"
   ],
-  "backup_exclude": [
-    "node_modules"
-  ],
-  "description": "Homebridge - HomeKit support for the impatient",
   "host_network": true,
   "image": "homebridge/homebridge",
   "init": false,
@@ -22,15 +23,11 @@
       "type": "share"
     }
   ],
-  "name": "Homebridge",
   "ports": {
     "8581/tcp": 8581
   },
   "ports_description": {
     "8581/tcp": "Homebridge UI"
   },
-  "slug": "homebridge",
-  "url": "https://hub.docker.com/r/homebridge/homebridge",
-  "version": "latest",
   "webui": "http://[HOST]:[PORT:8581]"
 }
