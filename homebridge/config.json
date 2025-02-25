@@ -11,23 +11,47 @@
   "host_network": true,
   "image": "homebridge/homebridge",
   "init": false,
+  "ingress": true,
+  "timeout": 30,
+  "panel_icon": "mdi:home-automation",
   "map": [
     {
-      "path": "/homebridge",
+      "type": "addon_config",
       "read_only": false,
-      "type": "addon_config"
+      "path": "/homebridge"
     },
     {
-      "path": "/config/homebridge-backup",
+      "type": "homeassistant_config",
       "read_only": false,
-      "type": "share"
+      "path": "/config"
+    },
+    {
+      "type": "share",
+      "read_only": false,
+      "path": "/config/homebridge-backup"
     }
   ],
   "ports": {
     "8581/tcp": 8581
   },
   "ports_description": {
-    "8581/tcp": "Homebridge UI"
+    "8581/tcp": "Frontend tcp-listen port"
   },
-  "webui": "http://[HOST]:[PORT:8581]"
+  "options": {
+    "data_path": "/config/homebridge",
+    "socat": {
+      "enabled": false,
+      "options": "-d -d",
+      "log": false
+    }
+  },
+  "schema": {
+    "data_path": "str",
+    "socat": {
+      "enabled": "bool?",
+      "options": "str?",
+      "log": "bool?"
+    },
+    "watchdog": "str?"
+  }
 }
