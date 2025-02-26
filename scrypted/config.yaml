@@ -4,6 +4,7 @@ slug: scrypted
 description: Scrypted is a high performance home video integration and automation
   platform
 url: https://github.com/koush/scrypted
+image: koush/scrypted
 arch:
 - amd64
 - aarch64
@@ -19,7 +20,6 @@ gpio: true
 usb: true
 uart: true
 video: true
-image: koush/scrypted
 environment:
   SCRYPTED_INSTALL_PLUGIN: '@scrypted/homeassistant'
   SCRYPTED_VOLUME: /data/scrypted_data
