@@ -1,6 +1,6 @@
-name: Scrypted
+name: Scrypted-armv7
 version: latest
-slug: scrypted
+slug: scrypted-armv7
 description: Scrypted is a high performance home video integration and automation
   platform
 image: blackwell97001/scrypted-armv7
