@@ -3,6 +3,7 @@ version: latest
 slug: scrypted-armv7
 description: Scrypted is a high performance home video integration and automation
   platform
+url: https://hub.docker.com/r/blackwell97001/scrypted-armv7
 image: blackwell97001/scrypted-armv7
 arch:
 - armv7
