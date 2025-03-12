@@ -7,7 +7,7 @@
 ![Supports i386 Architecture][i386-shield]
 ![Supports arm64 Architecture][arm64-shield]
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/koush/scrypted.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koush/scrypted)
+[![Docker Pulls](https://img.shields.io/docker/pulls/blackwell97001/scrypted-armv7.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/blackwell97001/scrypted-armv7)
 
 _Scrypted - can bridge most cameras to the three major home hubs_
 
@@ -17,11 +17,11 @@ HomeKit (including HomeKit Secure Video), Google Home, and Alexa. Scrypted strea
 
 Cameras: Unifi, Amcrest, Hikvision, ONVIF, RTSP, Ring, Arlo, Nest/Google, Tuya, Reolink, and more...
 
-https://hub.docker.com/r/koush/scrypted
+https://hub.docker.com/r/blackwell97001/scrypted-armv7
 
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[aarch64-shield]: https://img.shields.io/badge/aarch64-no-red.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-no-red.svg
 [armhf-shield]: https://img.shields.io/badge/armhf-no-red.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-no-red.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg
-[arm64-shield]: https://img.shields.io/badge/arm64-yes-green.svg
+[arm64-shield]: https://img.shields.io/badge/arm64-no-red.svg
