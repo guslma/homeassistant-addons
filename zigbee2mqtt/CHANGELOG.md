@@ -1,1 +1,1 @@
-SEE https://github.com/Koenkk/zigbee2mqtt/tags
+SEE https://github.com/zigbee2mqtt/hassio-zigbee2mqtt/tags
