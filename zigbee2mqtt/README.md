@@ -16,7 +16,7 @@ Allows you to use your Zigbee devices **without** the vendors bridge or gateway.
 It bridges events and allows you to control your Zigbee devices via MQTT. In this way you can integrate your Zigbee devices with whatever smart home infrastructure you are using.
 
 
-https://github.com/zigbee2mqtt/hassio-zigbee2mqtt
+https://hub.docker.com/r/koenkk/zigbee2mqtt
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
