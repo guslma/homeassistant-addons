@@ -17,7 +17,3 @@ _MySpeed - Is a speed test analysis._
 ### [Scrypted](./scrypted) [![Docker Pulls](https://img.shields.io/docker/pulls/koush/scrypted.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koush/scrypted)
 
 _Scrypted - Can bridge most cameras to the three major home hubs._
-
-### [Zigbee2MQTT](./zigbee2mqtt) [![Docker Pulls](https://img.shields.io/docker/pulls/koenkk/zigbee2mqtt.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koenkk/zigbee2mqtt)
-
-_Zigbee2MQTT - Allows you to use your Zigbee devices without the vendors bridge or gateway._
