@@ -8,8 +8,6 @@ arch:
 - armv7
 - amd64
 - aarch64
-backup_exclude:
-- node_modules
 host_network: true
 init: false
 map:
