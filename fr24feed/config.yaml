@@ -20,6 +20,7 @@ options:
   feeder_alt_ft: 0
   fr24_email: "seu@email.com"
   tz: "America/Sao_Paulo"
+  beast_host: "beasthost"
   mlat: "yes"
 schema:
   fr24_key: str
@@ -28,6 +29,7 @@ schema:
   feeder_alt_ft: int
   fr24_email: str
   tz: str
+  beast_host: str
   mlat: list(yes|no)
 ports:
   8754/tcp: 8754
