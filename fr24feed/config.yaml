@@ -14,14 +14,20 @@ host_network: true
 init: false
 hassio_api: true
 options:
-  fr24_key: "SEU_CODIGO_AQUI"
+  fr24_key: ""
+  feeder_lat: 0.0
+  feeder_long: 0.0
+  feeder_alt_ft: 0
+  fr24_email: "seu@email.com"
   tz: "America/Sao_Paulo"
-  beast_host: "beasthost"
   mlat: "yes"
 schema:
   fr24_key: str
+  feeder_lat: float
+  feeder_long: float
+  feeder_alt_ft: int
+  fr24_email: str
   tz: str
-  beast_host: str
   mlat: list(yes|no)
 ports:
   8754/tcp: 8754
