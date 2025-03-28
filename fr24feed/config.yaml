@@ -1,0 +1,32 @@
+name: "FlightRadar24 Feeder"
+version: "1.0.34-0"
+slug: "fr24feed"
+description: "Envia dados ADS-B para o FlightRadar24"
+url: https://hub.docker.com/r/mikenye/fr24feed
+image: "mikenye/fr24feed"
+arch:
+  - amd64
+  - armv7
+  - aarch64
+backup_exclude:
+- node_modules
+host_network: true
+init: false
+hassio_api: true
+options:
+  fr24_key: "SEU_CODIGO_AQUI"
+  tz: "America/Sao_Paulo"
+  beast_host: "beasthost"
+  mlat: "yes"
+schema:
+  fr24_key: str
+  tz: str
+  beast_host: str
+  mlat: list(yes|no)
+ports:
+  8754/tcp: 8754
+map:
+  - config
+  - share
+  - ssl
+webui: http://[HOST]:[PORT:8754]
