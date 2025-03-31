@@ -1,5 +1,5 @@
 name: FlightRadar24 Feeder
-version: latest_nohealthcheck_arm_v6
+version: latest_i386
 slug: fr24feed
 description: Envia dados ADS-B para o FlightRadar24
 url: https://hub.docker.com/r/mikenye/fr24feed
