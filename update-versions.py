@@ -13,7 +13,7 @@ def get_latest_and_previous_tag(repo_name):
         tags = response.json().get('results', [])
         
         # Filtra tags válidas: devem conter números e não podem conter padrões indesejados (ex.: -nvidia)
-        excluded_patterns = ['nvidia', 'beta', 'lite', 'router', 'nohealthcheck']  # Adicione padrões a serem excluídos
+        excluded_patterns = ['nvidia', 'beta', 'lite', 'router', 'latest']  # Adicione padrões a serem excluídos
         version_tags = [
             tag['name']
             for tag in tags
