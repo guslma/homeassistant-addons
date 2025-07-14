@@ -5,22 +5,18 @@ description: A speed test analysis software that shows your internet speed for u
 url: https://hub.docker.com/r/germannewsmaker/myspeed
 image: germannewsmaker/myspeed
 arch:
-  - armv7
-  - amd64
+- armv7
+- amd64
+startup: services
 ingress: true
 ingress_port: 5216
-ingress_stream: false  # pode ser omitido ou mantido como false
 panel_icon: mdi:speedometer
 hassio_api: true
 homeassistant_api: true
 init: false
 map:
-  - path: /myspeed/data
-    read_only: false
-    type: addon_config
-ports:
-  5216/tcp: 5216
-ports_description:
-  5216/tcp: MySpeed
+- path: /myspeed/data
+  read_only: false
+  type: addon_config
 backup_exclude:
-  - node_modules
+- node_modules
