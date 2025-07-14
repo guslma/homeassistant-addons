@@ -1,6 +1,7 @@
 name: Homebridge
 version: 'beta-2025-07-13'
 slug: homebridge
+panel_icon: mdi:home-automation
 description: Homebridge - HomeKit support for the impatient
 url: https://hub.docker.com/r/homebridge/homebridge
 image: homebridge/homebridge
@@ -8,7 +9,6 @@ arch:
 - armv7
 - amd64
 - aarch64
-panel_icon: mdi:home-automation
 backup_exclude:
 - node_modules
 startup: services
