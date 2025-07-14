@@ -1,5 +1,5 @@
 name: Homebridge
-version: 'beta-2025-07-13'
+version: '2025-07-12'
 slug: homebridge
 panel_icon: mdi:home-automation
 description: Homebridge - HomeKit support for the impatient
@@ -11,7 +11,6 @@ arch:
 - aarch64
 backup_exclude:
 - node_modules
-startup: services
 host_network: true
 init: false
 map:
