@@ -1,8 +1,6 @@
 name: Homebridge
 version: '2025-07-12'
 slug: homebridge
-panel_icon: mdi:home-automation
-hassio_api: true
 startup: services
 description: Homebridge - HomeKit support for the impatient
 url: https://hub.docker.com/r/homebridge/homebridge
