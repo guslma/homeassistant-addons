@@ -7,16 +7,16 @@ url: https://hub.docker.com/r/germannewsmaker/myspeed
 image: germannewsmaker/myspeed
 panel_icon: mdi:speedometer
 arch:
-  - armv7
-  - amd64
+- armv7
+- amd64
 backup_exclude:
-  - node_modules
+- node_modules
 host_network: true
 init: false
 map:
-  - path: /myspeed/data
-    read_only: false
-    type: addon_config
+- path: /myspeed/data
+  read_only: false
+  type: addon_config
 ports:
   5216/tcp: 5216
 ports_description:
