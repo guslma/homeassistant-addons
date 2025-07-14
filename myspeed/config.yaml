@@ -1,22 +1,23 @@
 name: MySpeed
 version: '1.0.9'
 slug: myspeed
+startup: services
 description: A speed test analysis software that shows your internet speed for up to 30 days
 url: https://hub.docker.com/r/germannewsmaker/myspeed
 image: germannewsmaker/myspeed
 arch:
-- armv7
-- amd64
-startup: services
-ingress: true
-ingress_port: 5216
-panel_icon: mdi:speedometer
-hassio_api: true
-homeassistant_api: true
+  - armv7
+  - amd64
+backup_exclude:
+  - node_modules
+host_network: true
 init: false
 map:
-- path: /myspeed/data
-  read_only: false
-  type: addon_config
-backup_exclude:
-- node_modules
+  - path: /myspeed/data
+    read_only: false
+    type: addon_config
+ports:
+  5216/tcp: 5216
+ports_description:
+  5216/tcp: MySpeed
+webui: http://[HOST]:[PORT:5216]
