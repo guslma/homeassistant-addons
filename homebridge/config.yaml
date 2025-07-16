@@ -1,5 +1,5 @@
 name: Homebridge
-version: '2025-07-12'
+version: '2025-07-15'
 slug: homebridge
 startup: services
 description: Homebridge - HomeKit support for the impatient
