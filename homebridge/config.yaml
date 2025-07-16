@@ -1,7 +1,6 @@
 name: Homebridge
 version: '2025-07-15'
 slug: homebridge
-startup: services
 description: Homebridge - HomeKit support for the impatient
 url: https://hub.docker.com/r/homebridge/homebridge
 image: homebridge/homebridge
