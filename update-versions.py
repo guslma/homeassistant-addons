@@ -6,7 +6,7 @@ import re
 
 def get_latest_and_previous_tag(repo_name):
     """Obtém a tag 'latest' e a versão anterior de uma imagem Docker no Docker Hub, ignorando tags indesejadas."""
-    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
+    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags?page_size=50'
     try:
         response = requests.get(tags_url)
         response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
@@ -79,3 +79,4 @@ for root, dirs, files in os.walk('.'):
             process_file(os.path.join(root, file), 'yaml')
         elif file.endswith('config.json'):
             process_file(os.path.join(root, file), 'json')
+
