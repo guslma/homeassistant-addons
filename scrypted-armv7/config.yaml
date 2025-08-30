@@ -6,8 +6,7 @@ description: Scrypted is a high performance home video integration and automatio
 url: https://hub.docker.com/r/blackwell97001/scrypted-armv7/tags
 image: blackwell97001/scrypted-armv7
 arch:
-- amd64
-- aarch64
+- armv7
 init: false
 ingress: true
 ingress_port: 11080
