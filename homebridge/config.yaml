@@ -1,9 +1,9 @@
 name: Homebridge
-version: '2025-09-03'
+version: '2025-08-29'
 slug: homebridge
 description: Homebridge - HomeKit support for the impatient
-url: https://github.com/homebridge/docker-homebridge
-image: homebridge/docker-homebridge
+url: https://hub.docker.com/r/homebridge/homebridge
+image: homebridge/homebridge
 arch:
 - armv7
 - amd64
