@@ -3,44 +3,45 @@ import json
 import yaml
 import requests
 import re
-from datetime import datetime
 
-def get_latest_release(repo_owner, repo_name):
-    """Obtém a última release estável (sem 'beta') de um repositório no GitHub"""
-    releases_url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/tags'
-    
+def get_latest_and_previous_tag(repo_name):
+    """Obtém a tag 'latest' e a versão anterior de uma imagem Docker no Docker Hub, ignorando tags indesejadas."""
+    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags?page_size=50'
     try:
-        response = requests.get(releases_url)
-        response.raise_for_status()
-        releases = response.json()
+        response = requests.get(tags_url)
+        response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
+        tags = response.json().get('results', [])
         
-        # Filtra releases que não são pré-releases e não contêm 'beta' no nome/tag
-        stable_releases = [
-            release for release in releases
-            if not release.get('prerelease', False) 
-            and 'beta' not in release.get('name', '').lower()
-            and 'beta' not in release.get('tag_name', '').lower()
+        # Filtra tags válidas: devem conter números e não podem conter padrões indesejados (ex.: -nvidia)
+        excluded_patterns = ['nvidia', 'beta', 'lite', 'router', 'intel', 'latest_nohealthcheck']  # Adicione padrões a serem excluídos
+        version_tags = [
+            tag['name']
+            for tag in tags
+            if re.search(r'\d', tag['name']) and not any(excl in tag['name'] for excl in excluded_patterns)
         ]
 
-        if not stable_releases:
-            print(f"Nenhuma release estável encontrada para {repo_owner}/{repo_name}")
-            return None
+        if not version_tags:
+            print(f"Nenhuma tag válida encontrada para {repo_name}.")
+            return None, None
 
-        # Ordena por data de publicação (mais recente primeiro)
-        stable_releases.sort(key=lambda x: x.get('published_at', ''), reverse=True)
-        
-        # Retorna a tag_name exatamente como está (com ou sem 'v')
-        return stable_releases[0].get('tag_name')
+        # Ordena as tags alfabeticamente em ordem decrescente
+        version_tags = sorted(version_tags, reverse=True)
+
+        # Verifica se a tag "latest" está na lista de todas as tags
+        all_tags = [tag['name'] for tag in tags]
+        if 'latest' in all_tags:
+            # Retorna a tag mais recente válida e a imediatamente anterior
+            return version_tags[0], 'latest'
+        else:
+            print(f"A tag 'latest' não foi encontrada para {repo_name}.")
+            return version_tags[0], None
 
     except requests.exceptions.RequestException as e:
-        print(f"Erro ao acessar GitHub para {repo_owner}/{repo_name}: {e}")
-        return None
-    except Exception as e:
-        print(f"Erro inesperado: {e}")
-        return None
+        print(f"Erro ao acessar o Docker Hub: {e}")
+        return None, None
 
-def process_config_file(file_path, file_format):
-    """Processa o arquivo de configuração e atualiza a versão se necessário"""
+def process_file(file_path, file_format):
+    """Processa o arquivo de configuração, atualizando a versão da imagem."""
     try:
         with open(file_path, 'r') as f:
             if file_format == 'yaml':
@@ -48,50 +49,34 @@ def process_config_file(file_path, file_format):
             elif file_format == 'json':
                 config = json.load(f)
             else:
+                print(f"Formato não suportado para {file_path}")
                 return
 
-        if not all(key in config for key in ['image', 'version']):
-            print(f"Arquivo {file_path} não contém 'image' e 'version'")
-            return
-
-        if '/' not in config["image"]:
-            print(f"Formato de imagem inválido em {file_path}: {config['image']}")
-            return
-            
-        repo_owner, repo_name = config["image"].split("/")
-        
-        print(f"Buscando última release estável de {repo_owner}/{repo_name}")
-        latest_release = get_latest_release(repo_owner, repo_name)
-
-        if not latest_release:
-            return
-
-        print(f"Versão atual: {config['version']}, Última release: {latest_release}")
-        
-        # Atualiza apenas se for diferente - mantém o formato original
-        if config["version"] != latest_release:
-            print(f"Atualizando {file_path} para versão {latest_release}")
-            config['version'] = latest_release
-            
-            with open(file_path, 'w') as f:
-                if file_format == 'yaml':
-                    yaml.dump(config, f, default_flow_style=False, sort_keys=False)
-                elif file_format == 'json':
-                    json.dump(config, f, indent=2)
-                    
-            print(f"Arquivo {file_path} atualizado com sucesso!")
+        if 'image' in config and 'version' in config:
+            print(f"Obtendo a última versão da imagem {config['image']} do Docker Hub")
+            previous_tag, latest_tag = get_latest_and_previous_tag(config['image'])
+            if previous_tag:
+                print(f"A versão anterior à 'latest' de {config['image']} é {previous_tag}")
+                if config['version'] != previous_tag:
+                    print(f"Atualizando {file_path} de {config['version']} para {previous_tag}")
+                    config['version'] = previous_tag
+                    with open(file_path, 'w') as f:
+                        if file_format == 'yaml':
+                            yaml.dump(config, f, default_flow_style=False, sort_keys=False)
+                        elif file_format == 'json':
+                            json.dump(config, f, indent=2)
+            else:
+                print(f"Não foi possível atualizar {file_path}.")
         else:
-            print(f"Arquivo {file_path} já está na versão mais recente")
-
+            print(f"Arquivo {file_path} não contém 'image' ou 'version'.")
     except Exception as e:
-        print(f"Erro ao processar {file_path}: {e}")
+        print(f"Erro ao processar o arquivo {file_path}: {e}")
 
-# Processa arquivos de configuração
+# Percorre todos os arquivos na árvore de diretórios
 for root, dirs, files in os.walk('.'):
     for file in files:
-        file_path = os.path.join(root, file)
-        
         if file.endswith('config.yaml'):
-            process_config_file(file_path, 'yaml')
+            process_file(os.path.join(root, file), 'yaml')
         elif file.endswith('config.json'):
-            process_config_file(file_path, 'json')
+            process_file(os.path.join(root, file), 'json')
+
