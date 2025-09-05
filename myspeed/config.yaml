@@ -1,10 +1,9 @@
 name: MySpeed
-version: v1.0.9
+version: '1.0.9'
 slug: myspeed
-description: A speed test analysis software that shows your internet speed for up
-  to 30 days
-url: https://github.com/gnmyt/MySpeed
-image: gnmyt/MySpeed
+description: A speed test analysis software that shows your internet speed for up to 30 days
+url: https://hub.docker.com/r/germannewsmaker/myspeed
+image: germannewsmaker/myspeed
 arch:
 - armv7
 - amd64
