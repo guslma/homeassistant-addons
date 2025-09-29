@@ -1,5 +1,5 @@
 name: Homebridge
-version: '2025-09-25'
+version: '2025-09-28'
 slug: homebridge
 description: Homebridge - HomeKit support for the impatient
 url: https://hub.docker.com/r/homebridge/homebridge
