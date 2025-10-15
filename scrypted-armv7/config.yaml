@@ -1,6 +1,6 @@
-name: Scrypted-armv7
+name: Scrypted-armV7
 version: latest
-slug: scrypted-armv7
+slug: scrypted-armV7
 description: Scrypted is a high performance home video integration and automation
   platform
 url: https://hub.docker.com/r/blackwell97001/scrypted-armv7
