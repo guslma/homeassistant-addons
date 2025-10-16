@@ -1,63 +1,43 @@
+
 name: n8n
-version: "1.115.2"
+version: 1.115.3
 slug: n8n
-description: Plataforma de automação de fluxos de trabalho de código aberto com interface integrada ao Home Assistant (Ingress).
+description: Flexible AI workflow automation
 url: https://hub.docker.com/r/n8nio/n8n
 image: n8nio/n8n
+webui: "[PROTO:ssl]://[HOST]:[PORT:5678]"
+hassio_api: true
 arch:
-  - amd64
   - aarch64
-  - armv7
-startup: services
+  - amd64
 init: false
-ingress: true
-ingress_port: 5678
-ingress_entry: /
-panel_icon: mdi:graph-outline
-
 map:
-  - homeassistant_config:rw
-  - addon_config:rw
-
-options:
-  TZ: America/Sao_Paulo
-  N8N_PROTOCOL: http
-  N8N_PORT: 5678
-  DB_TYPE: postgresdb
-  DB_POSTGRESDB_DATABASE: n8n
-  DB_POSTGRESDB_HOST: postgres  # Aqui aponta para o add-on ou container externo do DB
-  DB_POSTGRESDB_PORT: 5432
-  DB_POSTGRESDB_USER: n8n
-  DB_POSTGRESDB_PASSWORD: n8n
-  EXECUTIONS_DATA_SAVE_ON_PROGRESS: false
-  N8N_LOG_LEVEL: info
-
+  - type: addon_config
+    read_only: false
+  - type: share
+    read_only: false
+  - type: media
+    read_only: false
+  - type: ssl
+backup: cold
+backup_exclude:
+  - "**/logs"
 schema:
-  TZ: str
-  N8N_PROTOCOL: str
-  N8N_PORT: int
-  DB_TYPE: str
-  DB_POSTGRESDB_DATABASE: str
-  DB_POSTGRESDB_HOST: str
-  DB_POSTGRESDB_PORT: int
-  DB_POSTGRESDB_USER: str
-  DB_POSTGRESDB_PASSWORD: str
-  EXECUTIONS_DATA_SAVE_ON_PROGRESS: bool
-  N8N_LOG_LEVEL: list(error|warn|info|debug|silent)
-
-environment:
-  TZ: "{options.TZ}"
-  N8N_PROTOCOL: "{options.N8N_PROTOCOL}"
-  N8N_PORT: "{options.N8N_PORT}"
-  DB_TYPE: "{options.DB_TYPE}"
-  DB_POSTGRESDB_DATABASE: "{options.DB_POSTGRESDB_DATABASE}"
-  DB_POSTGRESDB_HOST: "{options.DB_POSTGRESDB_HOST}"
-  DB_POSTGRESDB_PORT: "{options.DB_POSTGRESDB_PORT}"
-  DB_POSTGRESDB_USER: "{options.DB_POSTGRESDB_USER}"
-  DB_POSTGRESDB_PASSWORD: "{options.DB_POSTGRESDB_PASSWORD}"
-  EXECUTIONS_DATA_SAVE_ON_PROGRESS: "{options.EXECUTIONS_DATA_SAVE_ON_PROGRESS}"
-  N8N_LOG_LEVEL: "{options.N8N_LOG_LEVEL}"
-  N8N_USER_FOLDER: /config/n8n
-  N8N_HOST: localhost
-  N8N_EDITOR_BASE_URL: /api/hassio_ingress/
-  WEBHOOK_URL: /api/hassio_ingress/
+  tunnel: bool
+  TZ: str?
+  GENERIC_TIMEZONE: str?
+  ssl: bool
+  certfile: str?
+  keyfile: str?
+  N8N_HOST: str?
+  N8N_PATH: str?
+  WEBHOOK_URL: str?
+options:
+  tunnel: false
+  ssl: true
+  certfile: fullchain.pem
+  keyfile: privkey.pem
+ports:
+  5678/tcp: 5678
+ports_description:
+  5678/tcp: Web UI
