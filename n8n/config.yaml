@@ -17,8 +17,13 @@ ports_description:
   5678/tcp: Interface Web do n8n
 webui: http://[HOST]:[PORT:5678]
 map:
-  - path: /home/node/.n8n
+  - path: /home/node/.n8n 
     read_only: false
-    type: addon_config 
-environment:
+    type: addon_config
+user: node
+options:
+  TZ: America/Sao_Paulo
   N8N_SECURE_COOKIE: false
+schema:
+  TZ: str
+  N8N_SECURE_COOKIE: bool
