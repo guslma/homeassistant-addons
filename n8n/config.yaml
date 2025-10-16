@@ -8,7 +8,7 @@ image: n8nio/n8n
 webui: http://[HOST]:[PORT:5678]
 hassio_api: true
 arch:
-  - aarch64
+  - arm64
   - amd64
 init: false
 map:
