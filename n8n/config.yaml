@@ -22,12 +22,9 @@ map:
 backup: cold
 backup_exclude:
   - "**/logs"
-schema:
+environment:
   N8N_SECURE_COOKIE: false
-  N8N_RUNNERS_ENABLED: true
-  DB_SQLITE_POOL_SIZE: 1
-  certfile: fullchain.pem
-  keyfile: privkey.pem
+  N8N_VOLUME: /home/node/.n8n
 ports:
   5678/tcp: 5678
 ports_description:
