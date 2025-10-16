@@ -10,7 +10,6 @@ arch:
   - aarch64
   - i386
 init: false
-host_network: false
 ports:
   5678/tcp: 5678
 ports_description:
