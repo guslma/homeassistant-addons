@@ -10,19 +10,19 @@ arch:
   - armv7
   - i386
 startup: services
-boot: auto
 init: false
 ingress: true
-ingress_port: 5678
-ingress_stream: false
 panel_icon: mdi:automation
-webui: "[PROTO:ssl]://[HOST]:[PORT:5678]"
+
 ports:
   5678/tcp: 5678
+
 ports_description:
   5678/tcp: Interface Web do n8n
+
 map:
-  - config:rw
+  - homeassistant_config:rw
+
 options:
   TZ: America/Sao_Paulo
   N8N_BASIC_AUTH_ACTIVE: true
@@ -32,6 +32,7 @@ options:
   EXECUTIONS_DATA_SAVE_ON_PROGRESS: "true"
   EXECUTIONS_DATA_SAVE_ON_SUCCESS: "true"
   N8N_LOG_LEVEL: info
+
 schema:
   TZ: str
   N8N_BASIC_AUTH_ACTIVE: bool
@@ -41,6 +42,7 @@ schema:
   EXECUTIONS_DATA_SAVE_ON_PROGRESS: str?
   EXECUTIONS_DATA_SAVE_ON_SUCCESS: str?
   N8N_LOG_LEVEL: str?
+
 environment:
   GENERIC_TIMEZONE: $TZ
   N8N_BASIC_AUTH_ACTIVE: $N8N_BASIC_AUTH_ACTIVE
@@ -51,4 +53,3 @@ environment:
   EXECUTIONS_DATA_SAVE_ON_SUCCESS: $EXECUTIONS_DATA_SAVE_ON_SUCCESS
   N8N_LOG_LEVEL: $N8N_LOG_LEVEL
   N8N_USER_FOLDER: /config/n8n
-
