@@ -1,55 +1,85 @@
 name: n8n
-version: "1.115.3"
+version: "1.115.2"
 slug: n8n
-description: Plataforma de automação de fluxo de trabalho de código aberto (n8n).
+description: Plataforma de automação de fluxos de trabalho de código aberto com interface integrada ao Home Assistant (Ingress).
 url: https://hub.docker.com/r/n8nio/n8n
-image: n8nio/n8n
 arch:
-  - aarch64
   - amd64
+  - aarch64
   - armv7
-  - i386
 startup: services
 init: false
+homeassistant_api: false
+host_network: false
 ingress: true
-panel_icon: mdi:automation
-
-ports:
-  5678/tcp: 5678
-
-ports_description:
-  5678/tcp: Interface Web do n8n
+ingress_port: 5678
+ingress_entry: /
+panel_icon: mdi:graph-outline
 
 map:
   - homeassistant_config:rw
+  - addon_config:rw
 
 options:
   TZ: America/Sao_Paulo
-  N8N_BASIC_AUTH_ACTIVE: true
-  N8N_BASIC_AUTH_USER: admin
-  N8N_BASIC_AUTH_PASSWORD: senha-forte
-  N8N_ENCRYPTION_KEY: chave-aleatoria-grande
-  EXECUTIONS_DATA_SAVE_ON_PROGRESS: "true"
-  EXECUTIONS_DATA_SAVE_ON_SUCCESS: "true"
+  N8N_PROTOCOL: http
+  DB_TYPE: postgresdb
+  DB_POSTGRESDB_DATABASE: n8n
+  DB_POSTGRESDB_HOST: db-n8n
+  DB_POSTGRESDB_PORT: 5432
+  DB_POSTGRESDB_USER: n8n
+  DB_POSTGRESDB_PASSWORD: n8n
+  EXECUTIONS_DATA_SAVE_ON_PROGRESS: false
   N8N_LOG_LEVEL: info
 
 schema:
   TZ: str
-  N8N_BASIC_AUTH_ACTIVE: bool
-  N8N_BASIC_AUTH_USER: str
-  N8N_BASIC_AUTH_PASSWORD: str
-  N8N_ENCRYPTION_KEY: str
-  EXECUTIONS_DATA_SAVE_ON_PROGRESS: str?
-  EXECUTIONS_DATA_SAVE_ON_SUCCESS: str?
-  N8N_LOG_LEVEL: str?
+  N8N_PROTOCOL: str
+  DB_TYPE: str
+  DB_POSTGRESDB_DATABASE: str
+  DB_POSTGRESDB_HOST: str
+  DB_POSTGRESDB_PORT: int
+  DB_POSTGRESDB_USER: str
+  DB_POSTGRESDB_PASSWORD: str
+  EXECUTIONS_DATA_SAVE_ON_PROGRESS: bool
+  N8N_LOG_LEVEL: list(error|warn|info|debug|silent)
 
 environment:
-  GENERIC_TIMEZONE: $TZ
-  N8N_BASIC_AUTH_ACTIVE: $N8N_BASIC_AUTH_ACTIVE
-  N8N_BASIC_AUTH_USER: $N8N_BASIC_AUTH_USER
-  N8N_BASIC_AUTH_PASSWORD: $N8N_BASIC_AUTH_PASSWORD
-  N8N_ENCRYPTION_KEY: $N8N_ENCRYPTION_KEY
+  TZ: $TZ
+  N8N_PROTOCOL: $N8N_PROTOCOL
+  DB_TYPE: $DB_TYPE
+  DB_POSTGRESDB_DATABASE: $DB_POSTGRESDB_DATABASE
+  DB_POSTGRESDB_HOST: $DB_POSTGRESDB_HOST
+  DB_POSTGRESDB_PORT: $DB_POSTGRESDB_PORT
+  DB_POSTGRESDB_USER: $DB_POSTGRESDB_USER
+  DB_POSTGRESDB_PASSWORD: $DB_POSTGRESDB_PASSWORD
   EXECUTIONS_DATA_SAVE_ON_PROGRESS: $EXECUTIONS_DATA_SAVE_ON_PROGRESS
-  EXECUTIONS_DATA_SAVE_ON_SUCCESS: $EXECUTIONS_DATA_SAVE_ON_SUCCESS
   N8N_LOG_LEVEL: $N8N_LOG_LEVEL
-  N8N_USER_FOLDER: /config/n8n
+  # Configurações especiais para Ingress funcionar
+  N8N_HOST: localhost
+  N8N_EDITOR_BASE_URL: /api/hassio_ingress/
+  N8N_PROTOCOL: http
+  WEBHOOK_URL: /api/hassio_ingress/
+  N8N_PORT: 5678
+
+services:
+  db-n8n:
+    image: postgres:14.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: $DB_POSTGRESDB_PASSWORD
+      POSTGRES_USER: $DB_POSTGRESDB_USER
+      POSTGRES_DB: $DB_POSTGRESDB_DATABASE
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U $DB_POSTGRESDB_USER -d $DB_POSTGRESDB_DATABASE"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - /addon_configs/n8n/db:/var/lib/postgresql/data
+    tmpfs:
+      - /var/run/postgresql
+
+image: n8nio/n8n:1.115.2
+volumes:
+  - /addon_configs/n8n/.n8n:/home/node/.n8n
