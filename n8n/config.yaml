@@ -5,7 +5,7 @@ slug: n8n
 description: Flexible AI workflow automation
 url: https://hub.docker.com/r/n8nio/n8n
 image: n8nio/n8n
-webui: "[PROTO:ssl]://[HOST]:[PORT:5678]"
+webui: http://[HOST]:[PORT:5678]
 hassio_api: true
 arch:
   - aarch64
@@ -25,6 +25,7 @@ backup_exclude:
 schema:
   tunnel: bool
   TZ: str?
+  N8N_SECURE_COOKIE: bool
   GENERIC_TIMEZONE: str?
   ssl: bool
   certfile: str?
@@ -33,6 +34,7 @@ schema:
   N8N_PATH: str?
   WEBHOOK_URL: str?
 options:
+  N8N_SECURE_COOKIE: false
   tunnel: false
   ssl: true
   certfile: fullchain.pem
