@@ -1,0 +1,40 @@
+name: n8n
+version: '1.115.3'
+slug: n8n
+description: Plataforma de automação de fluxo de trabalho de código aberto.
+url: https://hub.docker.com/r/n8nio/n8n
+image: n8nio/n8n
+arch:
+  - amd64
+  - armv7
+  - aarch64
+  - i386
+init: false
+host_network: false
+ports:
+  5678/tcp: 5678
+ports_description:
+  5678/tcp: Interface Web do n8n
+webui: http://[HOST]:[PORT:5678]
+map:
+  - path: /home/node/.n8n
+    read_only: false
+    type: addon_config 
+options:
+  TZ: Europe/Berlin 
+  N8N_HOST: ''
+  N8N_PORT: 5678
+  N8N_PROTOCOL: http
+  VUE_APP_URL_BASE_API: ''
+schema:
+  TZ: str
+  N8N_HOST: str
+  N8N_PORT: int
+  N8N_PROTOCOL: str
+  VUE_APP_URL_BASE_API: str
+environment:
+  N8N_HOST: $N8N_HOST
+  N8N_PORT: $N8N_PORT
+  N8N_PROTOCOL: $N8N_PROTOCOL
+  VUE_APP_URL_BASE_API: $VUE_APP_URL_BASE_API
+  TZ: $TZ
