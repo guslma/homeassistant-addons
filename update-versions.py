@@ -8,7 +8,7 @@ def get_latest_tag(repo_name):
     of the most recently updated tag on that page that is not a pre-release.
     """
     print(f"  Fetching first page of tags for {repo_name}...")
-    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
+    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags?page_size=50'
 
     try:
         response = requests.get(tags_url)
@@ -84,4 +84,5 @@ for root, dirs, files in os.walk('.'):
                 else:
                     print(f"  Could not determine the latest tag for {config['image']}.")
                 print("-" * 20)
+
 
