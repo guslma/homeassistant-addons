@@ -1,82 +1,86 @@
 import os
-import json
 import yaml
 import requests
-import re
 
-def get_latest_and_previous_tag(repo_name):
-    """Obtém a tag 'latest' e a versão anterior de uma imagem Docker no Docker Hub, ignorando tags indesejadas."""
-    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags?page_size=50'
+def get_latest_tag(repo_name):
+    """
+    Fetches the first page of tags for a Docker repository and returns the name
+    of the most recently updated tag on that page that is not a pre-release.
+    """
+    print(f"  Fetching first page of tags for {repo_name}...")
+    tags_url = f'https://hub.docker.com/v2/repositories/{repo_name}/tags'
+
     try:
         response = requests.get(tags_url)
-        response.raise_for_status()  # Levanta uma exceção se houver erro na requisição
+        response.raise_for_status()
         tags = response.json().get('results', [])
-        
-        # Filtra tags válidas: devem conter números e não podem conter padrões indesejados (ex.: -nvidia)
-        excluded_patterns = ['alpha', 'nvidia', 'beta', 'lite', 'router', 'intel', 'latest_nohealthcheck']  # Adicione padrões a serem excluídos
-        version_tags = [
-            tag['name']
-            for tag in tags
-            if re.search(r'\d', tag['name']) and not any(excl in tag['name'] for excl in excluded_patterns)
-        ]
-
-        if not version_tags:
-            print(f"Nenhuma tag válida encontrada para {repo_name}.")
-            return None, None
-
-        # Ordena as tags alfabeticamente em ordem decrescente
-        version_tags = sorted(version_tags, reverse=True)
-
-        # Verifica se a tag "latest" está na lista de todas as tags
-        all_tags = [tag['name'] for tag in tags]
-        if 'latest' in all_tags:
-            # Retorna a tag mais recente válida e a imediatamente anterior
-            return version_tags[0], 'latest'
-        else:
-            print(f"A tag 'latest' não foi encontrada para {repo_name}.")
-            return version_tags[0], None
-
     except requests.exceptions.RequestException as e:
-        print(f"Erro ao acessar o Docker Hub: {e}")
-        return None, None
+        print(f"  Error fetching tags: {e}")
+        return None
 
-def process_file(file_path, file_format):
-    """Processa o arquivo de configuração, atualizando a versão da imagem."""
-    try:
-        with open(file_path, 'r') as f:
-            if file_format == 'yaml':
-                config = yaml.safe_load(f)
-            elif file_format == 'json':
-                config = json.load(f)
-            else:
-                print(f"Formato não suportado para {file_path}")
-                return
+    if not tags:
+        print("  No tags found on the first page.")
+        return None
 
-        if 'image' in config and 'version' in config:
-            print(f"Obtendo a última versão da imagem {config['image']} do Docker Hub")
-            previous_tag, latest_tag = get_latest_and_previous_tag(config['image'])
-            if previous_tag:
-                print(f"A versão anterior à 'latest' de {config['image']} é {previous_tag}")
-                if config['version'] != previous_tag:
-                    print(f"Atualizando {file_path} de {config['version']} para {previous_tag}")
-                    config['version'] = previous_tag
-                    with open(file_path, 'w') as f:
-                        if file_format == 'yaml':
-                            yaml.dump(config, f, default_flow_style=False, sort_keys=False)
-                        elif file_format == 'json':
-                            json.dump(config, f, indent=2)
-            else:
-                print(f"Não foi possível atualizar {file_path}.")
-        else:
-            print(f"Arquivo {file_path} não contém 'image' ou 'version'.")
-    except Exception as e:
-        print(f"Erro ao processar o arquivo {file_path}: {e}")
+    # --- Filtering Logic ---
+    pre_release_keywords = ['beta', 'alpha', 'rc']
+    candidate_tags = []
 
-# Percorre todos os arquivos na árvore de diretórios
+    for tag in tags:
+        tag_name = tag['name'].lower()
+        
+        # 1. Filter out tags without a version number (like 'latest', 'stable')
+        if not any(char.isdigit() for char in tag_name):
+            continue
+            
+        # 2. Filter out pre-release versions
+        if any(keyword in tag_name for keyword in pre_release_keywords):
+            continue
+
+        # 3. Ensure the tag has a timestamp to sort by
+        if tag.get('last_updated'):
+            candidate_tags.append(tag)
+
+    if not candidate_tags:
+        print("  No suitable version tags found on the first page after filtering.")
+        return None
+
+    # --- Sorting Logic ---
+    # Sort the candidates by the 'last_updated' timestamp, descending.
+    # The ISO 8601 date format ("2022-12-20T16:05:07.03921Z") can be sorted as a string.
+    sorted_tags = sorted(
+        candidate_tags,
+        key=lambda t: t['last_updated'],
+        reverse=True
+    )
+
+    # The most recent tag is the first one in the sorted list.
+    latest_tag_name = sorted_tags[0]['name']
+    return latest_tag_name
+
 for root, dirs, files in os.walk('.'):
     for file in files:
-        if file.endswith('config.yaml'):
-            process_file(os.path.join(root, file), 'yaml')
-        elif file.endswith('config.json'):
-            process_file(os.path.join(root, file), 'json')
+        if file == 'config.yaml':
+            file_path = os.path.join(root, file)
+            with open(file_path, 'r') as f:
+                config = yaml.safe_load(f)
 
+            if 'image' in config:
+                print(f"Processing {file_path}...")
+                print(f"Checking for updates to image: {config['image']}")
+
+                latest_tag = get_latest_tag(config['image'])
+                
+                if latest_tag:
+                    current_version = config.get('version')
+                    print(f"  Current version: {current_version}, Latest available: {latest_tag}")
+                    if current_version != latest_tag:
+                        print(f"  UPDATE FOUND: Updating from {current_version} to {latest_tag}")
+                        config['version'] = latest_tag
+                        with open(file_path, 'w') as f:
+                            yaml.dump(config, f, default_flow_style=False, sort_keys=False, indent=2)
+                    else:
+                        print("  Already up to date.")
+                else:
+                    print(f"  Could not determine the latest tag for {config['image']}.")
+                print("-" * 20)
