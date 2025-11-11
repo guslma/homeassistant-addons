@@ -23,7 +23,7 @@ def get_latest_tag(repo_name):
         return None
 
     # --- Filtering Logic ---
-    pre_release_keywords = ['alpha', 'nvidia', 'beta', 'lite', 'router', 'intel', 'latest_nohealthcheck']
+    pre_release_keywords = ['alpha', 'nvidia', 'beta', 'lite', 'router', 'intel', 'latest_nohealthcheck', 'amd']
     candidate_tags = []
 
     for tag in tags:
@@ -84,5 +84,6 @@ for root, dirs, files in os.walk('.'):
                 else:
                     print(f"  Could not determine the latest tag for {config['image']}.")
                 print("-" * 20)
+
 
 
