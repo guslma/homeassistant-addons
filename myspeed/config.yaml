@@ -5,8 +5,8 @@ description: A speed test analysis software that shows your internet speed for u
 url: https://hub.docker.com/r/germannewsmaker/myspeed
 image: germannewsmaker/myspeed
 arch:
-- armv7
 - amd64
+- aarch64
 backup_exclude:
 - node_modules
 host_network: true
