@@ -11,7 +11,6 @@ arch:
 backup_exclude:
 - node_modules
 host_network: true
-init: true
 map:
 - path: /homebridge
   read_only: false
