@@ -5,7 +5,6 @@ description: Homebridge - HomeKit support for the impatient
 url: https://hub.docker.com/r/homebridge/homebridge
 image: homebridge/homebridge
 arch:
-- armv7
 - amd64
 - aarch64
 backup_exclude:
