@@ -8,7 +8,7 @@ arch:
   - amd64
   - aarch64
 init: false
-host_network: true
+host_network: false
 map:
   - path: /home/threadfin/conf
     type: addon_config
