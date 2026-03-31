@@ -9,16 +9,16 @@ arch:
 - amd64
 - armv7
 backup_exclude:
-- '*/adguard/data/querylog.*'
+- node_modules
 host_network: true
 init: false
 map:
-- path: /adguardhome/work
+- path: /opt/adguardhome/work
   read_only: false
-  type: addon_config
-- path: /adguardhome/conf
+  type: data
+- path: /opt/adguardhome/conf
   read_only: false
-  type: addon_config
+  type: data
 ports:
   53/udp: 53
   80/tcp: 80
