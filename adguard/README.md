@@ -29,3 +29,4 @@ easily manage the filtering process and its settings.
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg
 [arm64-shield]: https://img.shields.io/badge/arm64-yes-green.svg
+[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.1.1/images/screenshot.png
