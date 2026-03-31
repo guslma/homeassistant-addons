@@ -1,12 +1,13 @@
-# Home Assistant Community App: AdGuard Home
+# Home Assistant Add-on: AdGuard Home
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Supports armhf Architecture][armhf-shield]
+![Supports armv7 Architecture][armv7-shield]
+![Supports i386 Architecture][i386-shield]
+![Supports arm64 Architecture][arm64-shield]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
-
-[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
-
-[![Support Frenck on Patreon][patreon-shield]][patreon]
+[![Docker Pulls](https://img.shields.io/docker/pulls/adguard/adguardhome.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/adguard/adguardhome)
 
 Network-wide ads & trackers blocking DNS server.
 
@@ -22,16 +23,9 @@ easily manage the filtering process and its settings.
 
 ![AdGuard Home in the Home Assistant frontend][screenshot]
 
-[discord-shield]: https://img.shields.io/discord/478094546522079232.svg
-[discord]: https://discord.me/hassioaddons
-[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-adguard-home/90684?u=frenck
-[github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
-[github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
-[patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
-[patreon]: https://www.patreon.com/frenck
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v6.1.1-blue.svg
-[release]: https://github.com/hassio-addons/app-adguard-home/tree/v6.1.1
-[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.1.1/images/screenshot.png
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-no-red.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[i386-shield]: https://img.shields.io/badge/i386-no-red.svg
+[arm64-shield]: https://img.shields.io/badge/arm64-yes-green.svg
