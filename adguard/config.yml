@@ -20,7 +20,7 @@ map:
   read_only: false
   type: addon_config
 options:
-  ssl: true
+  ssl: false
   certfile: fullchain.pem
   keyfile: privkey.pem
 schema:
