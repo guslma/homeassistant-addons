@@ -1,8 +1,10 @@
 name: AdGuard Home
-version: v0.107.73
+version: 5.3.4
 slug: adguard
 description: Network-wide ads & trackers blocking DNS server
-url: https://hub.docker.com/r/adguard/adguardhome
+url: https://github.com/hassio-addons/addon-adguard-home
+codenotary: codenotary@frenck.dev
+ingress: true
 ingress_port: 0
 ingress_stream: true
 panel_icon: mdi:shield-check
@@ -39,4 +41,4 @@ schema:
   leave_front_door_open: bool?
 backup_exclude:
 - '*/adguard/data/querylog.*'
-image: adguard/adguardhome
+image: ghcr.io/hassio-addons/adguard/{arch}
