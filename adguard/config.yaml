@@ -13,13 +13,12 @@ backup_exclude:
 host_network: true
 init: false
 map:
-- path: /opt/adguardhome/work
+- path: /adguardhome/work
   read_only: false
   type: addon_config
-- path: /opt/adguardhome/conf
+- path: /adguardhome/conf
   read_only: false
   type: addon_config
-- ssl
 options:
   ssl: true
   certfile: fullchain.pem
