@@ -1,5 +1,5 @@
 name: Pihole
-version: latest
+version: 2026.02.0
 slug: pihole
 description: Network-wide ads & trackers blocking DNS server
 url: https://hub.docker.com/r/pihole/pihole
@@ -15,8 +15,8 @@ map:
 host_network: true
 init: false
 environment:
-  TZ: 'America/Bahia'
-  FTLCONF_webserver_api_password: 'MinhaSenhaSegura123!'
+  FTLCONF_webserver_api_password: 'admin'
+  FTLCONF_dns_listeningMode: 'ALL'
 ports:
   53/tcp: 53
   53/udp: 53
@@ -25,4 +25,4 @@ ports_description:
   53/udp: DNS server port
   53/tcp: DNS server port
   80/tcp: Web interface
-webui: http://[HOST]:[PORT:80]
+webui: http://[HOST]:[PORT:80]/admin/
