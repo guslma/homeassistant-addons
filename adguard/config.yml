@@ -14,6 +14,10 @@ map:
   type: addon_config
 host_network: true
 init: false
+ports:
+  53/tcp: 53
+  53/udp: 53
+  80/tcp: 80
 ports_description:
   53/udp: DNS server port
   53/tcp: DNS server port
