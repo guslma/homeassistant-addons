@@ -15,10 +15,10 @@ init: false
 map:
 - path: /opt/adguardhome/work
   read_only: false
-  type: data
+  type: addon_config
 - path: /opt/adguardhome/conf
   read_only: false
-  type: data
+  type: addon_config
 ports:
   53/udp: 53
   80/tcp: 80
