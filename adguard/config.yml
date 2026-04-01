@@ -15,12 +15,16 @@ init: false
 map:
 - path: /opt/adguardhome/work
   read_only: false
-  type: addon_config
+  type: data
 - path: /opt/adguardhome/conf
   read_only: false
-  type: addon_config
+  type: data
 ports:
   53/udp: 53
+  53/tcp: 53
+  3000/tcp: 3000
+  853/tcp: 853
+  784/tcp: 784
   80/tcp: 80
 ports_description:
   53/udp: DNS server port
