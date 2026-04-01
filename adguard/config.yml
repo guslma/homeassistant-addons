@@ -1,5 +1,5 @@
 name: Pihole
-version: 2026.02.0
+version: '2026.02.0'
 slug: pihole
 description: Network-wide ads & trackers blocking DNS server
 url: https://hub.docker.com/r/pihole/pihole
