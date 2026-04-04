@@ -1,5 +1,5 @@
 name: AdGuard Home
-version: v0.107.73
+version: v0.107.61
 slug: adguard
 description: Network-wide ads & trackers blocking DNS server
 url: https://hub.docker.com/r/adguard/adguardhome
