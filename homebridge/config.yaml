@@ -1,5 +1,5 @@
 name: Homebridge
-version: synology-2026-08-28
+version: synology-2026-09-02
 slug: homebridge
 description: Homebridge - HomeKit support for the impatient
 url: https://hub.docker.com/r/homebridge/homebridge
