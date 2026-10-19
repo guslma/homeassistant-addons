@@ -10,9 +10,9 @@ This repository contains the following add-ons:
 
 _Homebridge - HomeKit support for the impatient._
 
-### [MySpeed](./myspeed) [![Docker Pulls](https://img.shields.io/docker/pulls/germannewsmaker/myspeed.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/germannewsmaker/myspeed)
+### [SpeedMonitor](./speedmonitor) [![Version](https://img.shields.io/github/v/tag/guslma/SpeedMonitor?style=flat-square&logo=github&label=version)](https://github.com/guslma/SpeedMonitor)
 
-_MySpeed - Is a speed test analysis._
+_SpeedMonitor - Tracks your internet speed and outages over time._
 
 ### [Scrypted](./scrypted) [![Docker Pulls](https://img.shields.io/docker/pulls/koush/scrypted.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koush/scrypted)
 
