@@ -1,0 +1,20 @@
+name: SpeedMonitor
+version: '1.1.0'
+slug: speedmonitor
+description: Tracks your internet speed and outages over time, with alerts and a report on your contracted plan
+url: https://github.com/guslma/SpeedMonitor
+image: ghcr.io/guslma/speedmonitor
+arch:
+- amd64
+- aarch64
+host_network: true
+init: false
+map:
+- type: addon_config
+  path: /app/data
+  read_only: false
+ports:
+  5216/tcp: 5216
+ports_description:
+  5216/tcp: SpeedMonitor
+webui: http://[HOST]:[PORT:5216]

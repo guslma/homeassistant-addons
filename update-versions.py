@@ -1,6 +1,31 @@
 import os
+import re
 import yaml
 import requests
+
+
+def get_latest_ghcr_tag(image):
+    """
+    Returns the highest version tag (like 1.2.3) of an image on the GitHub
+    Container Registry (ghcr.io/owner/name), using an anonymous pull token.
+    """
+    repo_name = image.split('/', 1)[1]
+    print(f"  Fetching tags for {image}...")
+    try:
+        token = requests.get(f'https://ghcr.io/token?scope=repository:{repo_name}:pull').json()['token']
+        response = requests.get(f'https://ghcr.io/v2/{repo_name}/tags/list',
+                                headers={'Authorization': f'Bearer {token}'})
+        response.raise_for_status()
+        tags = response.json().get('tags') or []
+    except (requests.exceptions.RequestException, KeyError, ValueError) as e:
+        print(f"  Error fetching tags: {e}")
+        return None
+
+    versions = [tag for tag in tags if re.fullmatch(r'\d+(\.\d+)*', tag)]
+    if not versions:
+        print("  No version tags found.")
+        return None
+    return max(versions, key=lambda version: tuple(int(part) for part in version.split('.')))
 
 def get_latest_tag(repo_name):
     """
@@ -69,7 +94,10 @@ for root, dirs, files in os.walk('.'):
                 print(f"Processing {file_path}...")
                 print(f"Checking for updates to image: {config['image']}")
 
-                latest_tag = get_latest_tag(config['image'])
+                if config['image'].startswith('ghcr.io/'):
+                    latest_tag = get_latest_ghcr_tag(config['image'])
+                else:
+                    latest_tag = get_latest_tag(config['image'])
                 
                 if latest_tag:
                     current_version = config.get('version')
