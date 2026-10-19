@@ -1,5 +1,7 @@
 name: Lint
 
+# Checks every add-on (each folder with a config.yaml) with the Home Assistant add-on linter
+
 on:
   push:
     branches:
@@ -11,34 +13,14 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
-  filter:
-    runs-on: ubuntu-latest
-    outputs:
-      addons_changed: ${{ steps.filter.outputs.addons }}
-    steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v7
-
-      - name: 🔍 Filtrar add-ons modificados
-        id: filter
-        uses: dorny/paths-filter@v4
-        with:
-          filters: |
-            addons:
-              - 'addons/**'
-
   find:
     name: Find add-ons
     runs-on: ubuntu-latest
-    needs: filter
-    if: needs.filter.outputs.addons_changed != '[]'
     outputs:
       addons: ${{ steps.addons.outputs.addons_list }}
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v7
-        with:
-          fetch-depth: 1  # Reduz o tamanho do checkout
 
       - name: 🔍 Find add-on directories
         id: addons
@@ -50,14 +32,12 @@ jobs:
     needs: find
     if: needs.find.outputs.addons != '[]'
     strategy:
+      fail-fast: false
       matrix:
         path: ${{ fromJson(needs.find.outputs.addons) }}
     steps:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v7
-
-      - name: 📜 Debug variáveis do GitHub Actions
-        run: env | sort
 
       - name: 🚀 Run Home Assistant Add-on Lint
         uses: frenck/action-addon-linter@v2.21
