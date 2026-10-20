@@ -1,7 +1,8 @@
 name: SpeedMonitor
-version: '1.1.0'
+version: 1.1.1
 slug: speedmonitor
-description: Tracks your internet speed and outages over time, with alerts and a report on your contracted plan
+description: Tracks your internet speed and outages over time, with alerts and a report
+  on your contracted plan
 url: https://github.com/guslma/SpeedMonitor
 image: ghcr.io/guslma/speedmonitor
 arch:
