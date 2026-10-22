@@ -6,6 +6,10 @@
 
 This repository contains the following add-ons:
 
+### [GameDock](./gamedock) [![Version](https://img.shields.io/github/v/tag/guslma/GameDock?style=flat-square&logo=github&label=version)](https://github.com/guslma/GameDock)
+
+_GameDock - Serves your Nintendo Switch game library to the console over your home network._
+
 ### [Homebridge](./homebridge) [![Docker Pulls](https://img.shields.io/docker/pulls/homebridge/homebridge.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/homebridge/homebridge)
 
 _Homebridge - HomeKit support for the impatient._
