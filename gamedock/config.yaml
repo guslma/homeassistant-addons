@@ -1,8 +1,8 @@
 name: GameDock
-version: 1.2.1
+version: 2.5.0
 slug: gamedock
-description: Serves your Nintendo Switch game library to the console over your home network,
-  with Tinfoil, Sphaira and CyberFoil
+description: Serves your Nintendo Switch game library to the console over your home
+  network, with Tinfoil, Sphaira and CyberFoil
 url: https://github.com/guslma/GameDock
 image: ghcr.io/guslma/gamedock
 arch:
