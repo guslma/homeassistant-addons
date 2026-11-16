@@ -1,36 +1,110 @@
-name: Update Docker Image Version
+name: Update add-on versions
+
+# Every day, points each add-on at the version its image publishes as stable
+# (see update-versions.py), lints the add-ons that changed and merges the pull request.
+# Pull requests opened by this workflow do not start other workflows, so the lint runs here.
+#
+# GameDock and SpeedMonitor can also start it right after a release with:
+#   gh api repos/guslma/homeassistant-addons/dispatches -f event_type=addon-released
+# (needs a token with access to this repository)
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # Run every day at 10 AM
-  workflow_dispatch:  # Allow manual triggering of the workflow
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [addon-released]
+
+concurrency:
+  group: update-versions
+
+permissions:
+  contents: read
 
 jobs:
-  update-version:
+  update:
+    name: Find new versions
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      addons: ${{ steps.versions.outputs.addons }}
+      failed: ${{ steps.versions.outputs.failed }}
+      pr: ${{ steps.pr.outputs.pull-request-number }}
+      sha: ${{ steps.pr.outputs.pull-request-head-sha }}
     steps:
-      - name: Checkout Repository
+      - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v7
 
-      - name: Set up Python
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.12' 
+          python-version: "3.12"
 
-      - name: Install Dependencies
-        run: |
-          pip install pyyaml requests
+      - name: 📦 Install dependencies
+        run: pip install requests
 
-      - name: Update Docker Versions
-        id: update-docker-versions
+      - name: 🔍 Look for new versions
+        id: versions
         run: python update-versions.py
 
-      - name: Create Pull Request
+      - name: 📝 Open the pull request
+        id: pr
+        if: steps.versions.outputs.addons != '[]'
         uses: peter-evans/create-pull-request@v8
         with:
-          title: 'Update Docker image versions'
-          body: 'Automated update of Docker image versions.'
-          base: main
+          title: ${{ steps.versions.outputs.title }}
+          body: ${{ steps.versions.outputs.body }}
+          commit-message: ${{ steps.versions.outputs.title }}
           branch: update-docker-versions
-          commit-message: 'Update Docker image version'
+          base: main
+
+  lint:
+    name: Lint add-on ${{ matrix.path }}
+    runs-on: ubuntu-latest
+    needs: update
+    if: needs.update.outputs.pr
+    strategy:
+      fail-fast: false
+      matrix:
+        path: ${{ fromJson(needs.update.outputs.addons) }}
+    steps:
+      - name: ⤵️ Check out the pull request
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.update.outputs.sha }}
+
+      - name: 🚀 Run Home Assistant Add-on Lint
+        uses: frenck/action-addon-linter@v2.21
+        with:
+          path: "./${{ matrix.path }}"
+
+  merge:
+    name: Merge the pull request
+    runs-on: ubuntu-latest
+    needs: [update, lint]
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: 🔀 Merge
+        # A merge commit keeps guslma as the author of the update (peter-evans uses the
+        # actor); a squash could credit github-actions[bot], who opened the pull request
+        run: gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --merge --delete-branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ needs.update.outputs.pr }}
+
+  report:
+    name: Report add-ons that could not be checked
+    runs-on: ubuntu-latest
+    needs: update
+    if: needs.update.outputs.failed
+    steps:
+      - name: ⚠️ Fail the run
+        run: |
+          echo "::error::Could not check the version of: $FAILED"
+          exit 1
+        env:
+          FAILED: ${{ needs.update.outputs.failed }}
