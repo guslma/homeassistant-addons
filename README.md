@@ -6,10 +6,6 @@
 
 This repository contains the following add-ons:
 
-### [GameDock](./gamedock) [![Version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fguslma%2Fhomeassistant-addons%2Fmain%2Fgamedock%2Fconfig.yaml&query=%24.version&label=version&style=flat-square)](./gamedock/config.yaml)
-
-_GameDock - Serves your Nintendo Switch game library to the console over your home network._
-
 ### [Homebridge](./homebridge) [![Version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fguslma%2Fhomeassistant-addons%2Fmain%2Fhomebridge%2Fconfig.yaml&query=%24.version&label=version&style=flat-square)](./homebridge/config.yaml)
 
 _Homebridge - HomeKit support for the impatient._

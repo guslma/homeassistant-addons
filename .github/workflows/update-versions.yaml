@@ -4,7 +4,7 @@ name: Update add-on versions
 # (see update-versions.py), lints the add-ons that changed and merges the pull request.
 # Pull requests opened by this workflow do not start other workflows, so the lint runs here.
 #
-# GameDock and SpeedMonitor can also start it right after a release with:
+# SpeedMonitor can also start it right after a release with:
 #   gh api repos/guslma/homeassistant-addons/dispatches -f event_type=addon-released
 # (needs a token with access to this repository)
 
