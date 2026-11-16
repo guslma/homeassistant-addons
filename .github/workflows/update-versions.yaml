@@ -89,7 +89,9 @@ jobs:
       pull-requests: write
     steps:
       - name: 🔀 Merge
-        run: gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --squash --delete-branch
+        # A merge commit keeps guslma as the author of the update (peter-evans uses the
+        # actor); a squash could credit github-actions[bot], who opened the pull request
+        run: gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --merge --delete-branch
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ needs.update.outputs.pr }}
