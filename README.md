@@ -6,18 +6,18 @@
 
 This repository contains the following add-ons:
 
-### [GameDock](./gamedock) [![Version](https://img.shields.io/github/v/tag/guslma/GameDock?style=flat-square&logo=github&label=version)](https://github.com/guslma/GameDock)
+### [GameDock](./gamedock) [![Version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fguslma%2Fhomeassistant-addons%2Fmain%2Fgamedock%2Fconfig.yaml&query=%24.version&label=version&style=flat-square)](./gamedock/config.yaml)
 
 _GameDock - Serves your Nintendo Switch game library to the console over your home network._
 
-### [Homebridge](./homebridge) [![Docker Pulls](https://img.shields.io/docker/pulls/homebridge/homebridge.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/homebridge/homebridge)
+### [Homebridge](./homebridge) [![Version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fguslma%2Fhomeassistant-addons%2Fmain%2Fhomebridge%2Fconfig.yaml&query=%24.version&label=version&style=flat-square)](./homebridge/config.yaml)
 
 _Homebridge - HomeKit support for the impatient._
 
-### [SpeedMonitor](./speedmonitor) [![Version](https://img.shields.io/github/v/tag/guslma/SpeedMonitor?style=flat-square&logo=github&label=version)](https://github.com/guslma/SpeedMonitor)
+### [SpeedMonitor](./speedmonitor) [![Version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fguslma%2Fhomeassistant-addons%2Fmain%2Fspeedmonitor%2Fconfig.yaml&query=%24.version&label=version&style=flat-square)](./speedmonitor/config.yaml)
 
 _SpeedMonitor - Tracks your internet speed and outages over time._
 
-### [Scrypted](./scrypted) [![Docker Pulls](https://img.shields.io/docker/pulls/koush/scrypted.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/koush/scrypted)
+### [Scrypted](./scrypted) [![Version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fguslma%2Fhomeassistant-addons%2Fmain%2Fscrypted%2Fconfig.yaml&query=%24.version&label=version&style=flat-square)](./scrypted/config.yaml)
 
 _Scrypted - Can bridge most cameras to the three major home hubs._
